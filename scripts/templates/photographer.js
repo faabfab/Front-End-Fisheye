@@ -3,11 +3,9 @@
  * @param {JSON} data les donnés d'un photographe
  * @returns Les données du photographe et l'element DOM qui affiche les données
  */
-function photographerTemplate(data) {
-    const { name, city, country, price, portrait, tagline } = data;
-
+function photographerTemplate(data,) {
+    const { name, city, country, price, portrait, tagline, id } = data;
     const picture = `assets/photographers/${portrait}`;
-
     /**
      * Fonction qui affiche selon un format les données contenues dans data
      * @returns L'element DOM à afficher
@@ -15,7 +13,7 @@ function photographerTemplate(data) {
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
         const a = document.createElement('a')
-        a.setAttribute('href','#')
+        a.setAttribute('href','photographer.html?id='+id)
         const pict = document.createElement('picture')
         pict.setAttribute('class', 'imgLayer')
         const img = document.createElement( 'img' );
@@ -38,5 +36,7 @@ function photographerTemplate(data) {
         a.appendChild(p2)
         return (article);
     }
-    return { name, city, picture, tagline, getUserCardDOM }
+    return { name, city, country, price, portrait, tagline, id, getUserCardDOM }
 }
+
+export {photographerTemplate}

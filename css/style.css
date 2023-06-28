@@ -89,4 +89,34 @@ h1 {
 }
 .photographer_section article .price {
   color: #757575;
+}
+
+.photograph {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.photograph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.photograph-infos h1, .photograph-infos h2 {
+  margin: 0px;
+}
+.photograph-infos h1 {
+  font-weight: 400;
+  font-size: 64px;
+  color: #D3573C;
+}
+.photograph-infos h2 {
+  font-size: 24px;
+  font-weight: 400;
+  color: #901C1C;
+}
+.photograph-infos p {
+  font-size: 18px;
+  font-weight: 400;
+  color: #525252;
 }/*# sourceMappingURL=style.css.map */

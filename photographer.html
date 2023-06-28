@@ -9,18 +9,26 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="/">
+        <img src="assets/images/logo.png" class="logo" />
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <div class="photograph-infos">
+          <h1>Name</h1>
+          <h2>city, country</h2>
+          <p>tagline</p>
+        </div>
+        <button class="contact_button">Contactez-moi</button>
+        <img src="assets/photographers/account.png" alt="">
       </div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" class="closeButton"/>
         </header>
 				<form>
 					<div>
@@ -31,7 +39,7 @@
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/pages/photographer.js" type="module"></script>
+    <!-- <script src="/scripts/utils/contactForm.js"></script> -->
   </body>
 </html>

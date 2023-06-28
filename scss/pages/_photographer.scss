@@ -1,0 +1,31 @@
+.photograph{
+    flex-direction: column;
+    align-items: flex-start;
+    &-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    &-infos{
+        & h1,h2{
+            margin: 0px;
+        }
+        & h1{
+            font-weight: 400;
+            font-size: 64px;
+            color: #D3573C;
+        }
+        & h2{
+            font-size: 24px;
+            font-weight: 400;
+            color: #901C1C;
+        }
+        & p{
+            font-size: 18px;
+            font-weight: 400;
+            color: #525252;
+        }
+    }
+}
