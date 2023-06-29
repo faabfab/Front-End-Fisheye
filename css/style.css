@@ -102,6 +102,21 @@ h1 {
   padding-left: 50px;
   padding-right: 50px;
 }
+.photograph-header picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  overflow: hidden;
+}
+.photograph-header img {
+  width: 350px;
+  height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .photograph-infos h1, .photograph-infos h2 {
   margin: 0px;
 }

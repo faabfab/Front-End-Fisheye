@@ -3,7 +3,7 @@
  * @param {JSON} data les donnés d'un photographe
  * @returns Les données du photographe et l'element DOM qui affiche les données
  */
-function photographerTemplate(data,) {
+function photographerTemplate(data) {
     const { name, city, country, price, portrait, tagline, id } = data;
     const picture = `assets/photographers/${portrait}`;
     /**

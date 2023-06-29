@@ -7,6 +7,20 @@
         align-items: center;
         padding-left: 50px;
         padding-right: 50px;
+        & picture{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        & img{
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+        }
     }
     &-infos{
         & h1,h2{
