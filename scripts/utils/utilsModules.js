@@ -41,4 +41,29 @@ function getPhotographerId (url) {
     return searchParams.get("id")
 }
 
-export {getPhotographers, getPhotographer, getPhotographerId}
+
+async function getMedias() {
+
+    // adresse à récupérer
+    let url = "./data/photographers.json"
+    
+    // affectation de la promise
+    let response = await fetch(url);
+
+    if (response.ok) { // if HTTP-status is 200-299
+    // obtenir le corps de réponse (la méthode expliquée ci-dessous)
+        // récupération des données au format JSON
+        let json = await response.json()
+        let medias = json.media
+        return({medias : [...medias]})
+    } else { // Problème de récupération des données
+        alert("HTTP-Error: " + response.status);
+    }
+}
+
+async function getMediasByID(id) {
+    const mediasByID = getMedias()
+    return mediasByID
+}
+
+export {getPhotographers, getPhotographer, getPhotographerId, getMedias, getMediasByID}

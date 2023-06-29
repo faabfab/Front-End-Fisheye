@@ -2,24 +2,25 @@
 // Ce baser sur index.js
 // =============================================================================
 
-// TODO: Faire displayData
+//TODO: Faire displayData
 
 import { displayModal, closeModal } from "../utils/contactForm.js"
-const contactButton = document.querySelector('.contact_button')
-contactButton.addEventListener('click',displayModal)
-const closeButton = document.querySelector('.closeButton')
-closeButton.addEventListener('click',closeModal)
 
-import { getPhotographer, getPhotographerId } from "../utils/utilsModules.js"
-import { photographerInfos } from "../templates/photographerPage.js"
+import { getPhotographer, getPhotographerId, getMediasByID } from "../utils/utilsModules.js"
+import { photographerInfosSection, photographerMediasSection } from "../templates/photographerPage.js"
 
-async function displayData(parameter) {
+const main = document.querySelector('main')
+
+async function displayDataInfos(parameter, element) {
     // Les infos
-    photographerInfos(parameter)
+    element.appendChild(photographerInfosSection(parameter))
+}
+
+async function displayDataMedias(id, element) {
     // Les médias
-
-
-
+    const medias = await getMediasByID(id)
+    console.log(toString(medias))
+    element.appendChild(photographerMediasSection(id, medias))
 }
 
 async function init() {
@@ -29,7 +30,14 @@ async function init() {
     // FIXME: Fallait mettre "await" attendre la promise fonction "async" => "await"
     const photograph = await getPhotographer(id)
     // affichage les infos du photographe
-    displayData(photograph);
+    displayDataInfos(photograph,main);
+    displayDataMedias(id,main);
+
+    // DOM Events
+    const contactButton = document.querySelector('.contact_button')
+    contactButton.addEventListener('click',displayModal)
+    const closeButton = document.querySelector('.closeButton')
+    closeButton.addEventListener('click',closeModal)
 }
 
 init();
