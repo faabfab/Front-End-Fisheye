@@ -7,7 +7,7 @@
 import { displayModal, closeModal } from "../utils/contactForm.js"
 
 import { getPhotographer, getPhotographerId, getMediasByID } from "../utils/utilsModules.js"
-import { photographerInfosSection, photographerMediasSection } from "../templates/photographerPage.js"
+import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
 
 const main = document.querySelector('main')
 
@@ -16,11 +16,19 @@ async function displayDataInfos(parameter, element) {
     element.appendChild(photographerInfosSection(parameter))
 }
 
+
+
 async function displayDataMedias(id, element) {
     // Les médias
     const medias = await getMediasByID(id)
-    console.log(toString(medias))
-    element.appendChild(photographerMediasSection(id, medias))
+    medias.forEach(media => {
+        if (media.photographerId == id) {
+            //console.log(media.id +' : '+ media.title)
+            const mediaModel = mediasTemplate(media,id)
+            const mediaCardDOM = mediaModel.getMediasCardDOM()
+            element.appendChild(mediaCardDOM)
+        }
+    });
 }
 
 async function init() {
@@ -31,7 +39,16 @@ async function init() {
     const photograph = await getPhotographer(id)
     // affichage les infos du photographe
     displayDataInfos(photograph,main);
-    displayDataMedias(id,main);
+
+    // TODO: Affichage des médias du photographe
+    const mediasSection = document.createElement('section')
+    mediasSection.setAttribute('id','medias')
+    main.appendChild(mediasSection)
+    const photographerMedias = document.getElementById('medias')
+    const { medias } = await getMediasByID
+    displayDataMedias(id,photographerMedias);
+
+
 
     // DOM Events
     const contactButton = document.querySelector('.contact_button')

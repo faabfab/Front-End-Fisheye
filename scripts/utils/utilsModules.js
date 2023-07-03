@@ -55,7 +55,7 @@ async function getMedias() {
         // récupération des données au format JSON
         let json = await response.json()
         let medias = json.media
-        return({medias : [...medias]})
+        return([...medias])
     } else { // Problème de récupération des données
         alert("HTTP-Error: " + response.status);
     }

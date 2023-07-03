@@ -38,15 +38,17 @@ function photographerInfosSection(data) {
 
 // TODO: Fonction photographerMediasSection
 
-function photographerMediasSection (id, data) {
-    const {title, images, likes, date, price} = data
-    console.log(data)
-    const mediasSection = document.createElement('section')
-    mediasSection.setAttribute('id','medias')
-    mediasSection.textContent = id + data
+function mediasTemplate (data,id) {
+    const {photographerId ,title, images, likes, date, price} = data
 
-    return mediasSection
+    function getMediasCardDOM() {
+        const article = document.createElement('article')
+        article.textContent = title+' '+ photographerId
+
+        return article
+    }
+    return {photographerId, title, images, likes, date, price, getMediasCardDOM}
 }
 
 
-export {photographerInfosSection, photographerMediasSection}
+export {photographerInfosSection, mediasTemplate}
