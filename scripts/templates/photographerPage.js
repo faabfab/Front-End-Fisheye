@@ -37,17 +37,40 @@ function photographerInfosSection(data) {
 }
 
 // TODO: Fonction photographerMediasSection
+// UNDONE: Comment faire les miniatures des vidéos
 
 function mediasTemplate (data,id) {
-    const {photographerId ,title, images, likes, date, price} = data
-
+    const {photographerId ,title, image, likes, date, price} = data
+    const pict = `assets/images/${photographerId}/${image}`
     function getMediasCardDOM() {
         const article = document.createElement('article')
-        article.textContent = title+' '+ photographerId
+        article.setAttribute('class', 'media')
+        const a = document.createElement('a')
+        a.setAttribute('href', '#')
+        const picture = document.createElement('picture')
+        const img = document.createElement('img')
+        img.setAttribute('src', pict)
+        picture.appendChild(img)
+        const figcaption = document.createElement('figcaption')
+        const h2= document.createElement('h2')
+        h2.textContent = title
+        const h3 = document.createElement('h3')
+        const span = document.createElement('span') 
+        span.textContent = likes+ ' '
+        const i = document.createElement('i')
+        i.setAttribute('class','fa-solid fa-heart')
+        h3.appendChild(span)
+        h3.appendChild(i)
+        figcaption.appendChild(h2)
+        figcaption.appendChild(h3)
+        a.appendChild(picture)
+        a.appendChild(figcaption)
+        article.appendChild(a)
+        //article.textContent = picture+' '+ title
 
         return article
     }
-    return {photographerId, title, images, likes, date, price, getMediasCardDOM}
+    return {photographerId, title, image, likes, date, price, getMediasCardDOM}
 }
 
 

@@ -23,7 +23,6 @@ async function displayDataMedias(id, element) {
     const medias = await getMediasByID(id)
     medias.forEach(media => {
         if (media.photographerId == id) {
-            //console.log(media.id +' : '+ media.title)
             const mediaModel = mediasTemplate(media,id)
             const mediaCardDOM = mediaModel.getMediasCardDOM()
             element.appendChild(mediaCardDOM)

@@ -125,13 +125,50 @@ h1 {
   font-size: 64px;
   color: #D3573C;
 }
-.photograph-infos h2 {
-  font-size: 24px;
-  font-weight: 400;
-  color: #901C1C;
-}
 .photograph-infos p {
   font-size: 18px;
   font-weight: 400;
   color: #525252;
+}
+
+h2, h3 {
+  font-size: 24px;
+  font-weight: 400;
+  color: #901C1C;
+}
+
+#medias {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#medias .media {
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin-bottom: 20px;
+}
+#medias .media a {
+  text-decoration: none;
+}
+#medias .media a picture {
+  width: 350px;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+#medias .media a picture img {
+  min-height: 300px;
+  min-width: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#medias .media a figcaption {
+  display: flex;
+  justify-content: space-between;
 }/*# sourceMappingURL=style.css.map */
