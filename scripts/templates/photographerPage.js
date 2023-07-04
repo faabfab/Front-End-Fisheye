@@ -46,7 +46,12 @@ function mediasTemplate (data,id) {
     //test si image ou vidéo
     if (image != undefined) { pict = `assets/images/${photographerId}/${image}` }
     // TODO: Test si image ou vidéo et afficher une miniature
-    if (video) { pict = `assets/photographers/account.png` }
+    if (video) {
+        pict = video.substr(0,video.length-3)+'jpg'
+        pict = `assets/images/${photographerId}/`+pict
+        console.log(pict)
+        //pict = `assets/photographers/account.png`
+    }
     
     function getMediasCardDOM() {
         const article = document.createElement('article')
