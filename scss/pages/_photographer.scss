@@ -78,4 +78,10 @@ h2, h3{
     }
 }
 
-
+dialog{
+    border: none;
+    padding: 0px;
+    & .modal{
+        width: 100%;
+    }
+}

@@ -171,4 +171,12 @@ h2, h3 {
 #medias .media a figcaption {
   display: flex;
   justify-content: space-between;
+}
+
+dialog {
+  border: none;
+  padding: 0px;
+}
+dialog .modal {
+  width: 100%;
 }/*# sourceMappingURL=style.css.map */

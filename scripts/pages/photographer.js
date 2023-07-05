@@ -34,12 +34,10 @@ async function init() {
     const url = document.location.href
     const id = getPhotographerId(url)
     // Récupère les datas du photographe
-    // FIXME: Fallait mettre "await" attendre la promise fonction "async" => "await"
     const photograph = await getPhotographer(id)
     // affichage les infos du photographe
     displayDataInfos(photograph,main);
 
-    // TODO: Affichage des médias du photographe
     const mediasSection = document.createElement('section')
     mediasSection.setAttribute('id','medias')
     main.appendChild(mediasSection)

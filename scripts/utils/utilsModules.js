@@ -27,9 +27,7 @@ async function getPhotographer(id) {
     let photograph = ''
     photographers.forEach(photographer => {
         if (photographer.id == id) {
-            // FIXME: On met enlève ...
             photograph = photographer
-            //console.log(photographer)
         }
     });
     return photograph

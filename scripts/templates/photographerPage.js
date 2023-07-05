@@ -37,20 +37,17 @@ function photographerInfosSection(data) {
 }
 
 // TODO: Fonction photographerMediasSection
-// UNDONE: Comment faire les miniatures des vidéos
 // UNDONE: A quoi correspond l'encart rose avec le prix et comment il apparait ?
+// TODO: Modale des médias
 
 function mediasTemplate (data,id) {
     const {photographerId ,title, image, video, likes, date, price} = data
     let pict = ''
     //test si image ou vidéo
     if (image != undefined) { pict = `assets/images/${photographerId}/${image}` }
-    // TODO: Test si image ou vidéo et afficher une miniature
     if (video) {
         pict = video.substr(0,video.length-3)+'jpg'
         pict = `assets/images/${photographerId}/`+pict
-        console.log(pict)
-        //pict = `assets/photographers/account.png`
     }
     
     function getMediasCardDOM() {
