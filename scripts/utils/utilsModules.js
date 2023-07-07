@@ -64,4 +64,24 @@ async function getMediasByID(id) {
     return mediasByID
 }
 
-export {getPhotographers, getPhotographer, getPhotographerId, getMedias, getMediasByID}
+function likesIncrement(elem,limite) {
+    // FIXME: Tester et augmenter au click
+    let nbLike = Number(elem.textContent)
+    if (nbLike<limite) {
+        nbLike++
+        elem.textContent = nbLike
+        return true
+    } else{return false}
+}
+
+function totalLikesIncrement(bool) {
+    const totalLikes = document.querySelector('#photographer_likes')
+    let nbTotalLikes = Number(totalLikes.textContent)
+    if (bool === true) {
+        nbTotalLikes++
+    }
+    console.log(nbTotalLikes)
+    totalLikes.textContent = nbTotalLikes
+}
+
+export {getPhotographers, getPhotographer, getPhotographerId, getMedias, getMediasByID,likesIncrement, totalLikesIncrement}

@@ -7,6 +7,7 @@
         align-items: center;
         padding-left: 50px;
         padding-right: 50px;
+        margin-top: 30px;
         & picture{
             display: flex;
             align-items: center;
@@ -38,7 +39,7 @@
         }
     }
 }
-h2, h3{
+h2, h3, .like_button, .all_like_button{
     font-size: 24px;
     font-weight: 400;
     color: #901C1C;
@@ -57,6 +58,7 @@ h2, h3{
         & a{
             text-decoration: none;
             & picture {
+                position: relative;
                 width: 350px;
                 height: 300px;
                 overflow: hidden;
@@ -70,12 +72,46 @@ h2, h3{
                     object-fit: cover;
                 }
             }
-            & figcaption {
-                display: flex;
-                justify-content: space-between;
-            }
+        }
+        & figcaption {
+            display: flex;
+            justify-content: space-between;
         }
     }
+}
+
+.like_button, .all_like_button{
+    border: 0;
+    background-color: transparent;
+}
+.all_like_button{
+    color: black;
+}
+
+#price_likes{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    position: fixed;
+    bottom: -25px;
+    right: 120px;
+    width: 376px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #DB8876;
+    & p{
+        font-size: 24px;
+        margin: 0;
+    }
+}
+
+.is_video{
+    position: absolute;
+    background-color: #DB8876;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 24px;
+    color: black;
 }
 
 dialog{
