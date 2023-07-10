@@ -29,15 +29,29 @@
     <dialog id="contact_modal">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
+          <h2>Contactez-moi <br><span id="photograph_name"></span></h2>
+          
           <img src="assets/icons/close.svg" class="closeButton"/>
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
+        <!-- TODO: Que mettre dans la form  -->
+        <form id="contactForm" name="contact" action="javascript:window.location = document.location.href">
+          <div class="formData" id="firstData">
+						<label id="first" for="first">Prénom</label>
+						<input type="text" id="first" name="first">
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <div class="formData" id="lastData">
+						<label id="last" for="last">Nom</label>
+						<input type="text" id="last" name="last">
+					</div>
+          <div class="formData" id="emailData">
+						<label id="email" for="email">Email</label>
+						<input type="email" id="email" name="email">
+					</div>
+          <div class="formData" id="messageData">
+						<label id="message" for="message">Votre message</label>
+						<textarea id="massage" name="message"></textarea>
+					</div>
+          <button class="contact_button" type="submit">Envoyer</button>
 				</form>
 			</div>
 		</dialog>
