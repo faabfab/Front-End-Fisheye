@@ -83,6 +83,7 @@ h2, h3, .like_button, .all_like_button{
 .like_button, .all_like_button{
     border: 0;
     background-color: transparent;
+    cursor: pointer;
 }
 .all_like_button{
     color: black;
@@ -115,9 +116,74 @@ h2, h3, .like_button, .all_like_button{
 }
 
 dialog{
+    position: absolute;
+    top: 60px;
     border: none;
-    padding: 0px;
-    & .modal{
+    padding: 100px;
+    width: 50%;
+    background-color: transparent;
+        & .modal{
         width: 100%;
+        box-shadow: -5px 10px 30px 0px #00000040;
+        & h2{
+            color: black;
+            margin: 0px;
+            line-height: 1.1;
+            margin-top: 30px;
+            text-align: left;
+        }
+    }
+    & form{
+        margin-top: 50px;
+        & .formData{
+            margin-bottom: 0px;
+        }
+        & textarea{
+            height: 170px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 26px;
+        }
+        & textarea, input{
+            width: 97%;
+            font-size: 28px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
     }
 }
+
+.filters{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+    font-family: DM Sans;
+    font-size: 18px;
+    font-weight: 700;
+    & select{
+        margin-left: 20px ;
+        padding: 0px;
+        width: 170px;
+        border-radius: 4px;
+        box-shadow: 0px 4px 4px 0px #00000040;
+        border: none;
+        background-color: #901C1C;
+        height: 50px;
+        border-radius: 4px;
+        color: white;
+        font-size: 18px;
+        &-wrapper::after {
+            content: "g";
+        }
+
+        & option.filter_item{
+            :hover{
+                background-color: transparent;
+            }
+        }
+    }
+}
+

@@ -15,6 +15,15 @@
       </a>
     </header>
     <main id="main">
+      <section id="photographer_infos"></section>
+      <div class="filters">
+        <label for="list" class="filters_display">Trier par</label> 
+          <select name="list">
+            <option class="filter_item" value="pop">Popularité</option>
+            <option class="filter_item" value="date">Date</option>                  
+            <option class="filter_item" value="title">Titre</option>
+          </select>
+      </div>
     </main>
     <div id="price_likes">
       <p>
@@ -25,7 +34,7 @@
       </p>
       <p><span id="photographer_prices"></span> €/jour</p>
     </div>
-    <!-- UNDONE: La modale doit s'afficher par dessus pas en bas -->
+    <!-- FIXME: La modale doit s'afficher par dessus pas en bas -->
     <dialog id="contact_modal">
 			<div class="modal">
 				<header>

@@ -3,18 +3,17 @@
 // =============================================================================
 
 
-import { displayModal, closeModal } from "../utils/contactForm.js"
-
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
+import { filterByName } from "../utils/mediasFilters.js"
 
 const main = document.querySelector('main')
+const photographerInfos = document.querySelector('#photographer_infos')
 
 async function displayDataInfos(parameter, element) {
     // Les infos
     element.appendChild(photographerInfosSection(parameter))
 }
-
 
 
 async function displayDataMedias(id, element) {
@@ -44,8 +43,7 @@ async function init() {
     // Récupère les datas du photographe
     const photograph = await getPhotographer(id)
     // affichage les infos du photographe
-    displayDataInfos(photograph,main);
-
+    displayDataInfos(photograph,photographerInfos);
     const mediasSection = document.createElement('section')
     mediasSection.setAttribute('id','medias')
     main.appendChild(mediasSection)
@@ -55,15 +53,24 @@ async function init() {
 
 
 
+    
     // DOM Events
+    // Contact modal
+    const contactModal = document.querySelector('#contact_modal')
+
     const contactButton = document.querySelector('.contact_button')
-    contactButton.addEventListener('click',displayModal)
+    contactButton.addEventListener('click', ()=>{
+        contactModal.showModal()
+    })
     const closeButton = document.querySelector('.closeButton')
-    closeButton.addEventListener('click',closeModal)
+    closeButton.addEventListener('click' , ()=>{
+        contactModal.close()
+    })
 }
 
 init();
 
+// TODO: Gros problème de fonctionnement dés fois oui des fois non
 // FIXME: Traitement de l'incrémentation
 window.onload = function () {
     // DOM
@@ -76,4 +83,11 @@ window.onload = function () {
             totalLikesIncrement(likesIncrement(likesSpan,nbLikeLimit))
         })
     });
+
+    // filters DOM
+    const filters = document.querySelector('select')
+    filters.addEventListener('change',()=>{
+        console.log(filters.childNodes)
+    })
+
   }

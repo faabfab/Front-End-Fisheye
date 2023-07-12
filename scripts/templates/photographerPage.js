@@ -39,6 +39,9 @@ function photographerInfosSection(data) {
     infosSection.appendChild(button)
     infosSection.appendChild(picture)
 
+    const formName = document.getElementById('photograph_name')
+    formName.textContent = name
+
     return infosSection
 }
 
@@ -74,6 +77,7 @@ function mediasTemplate (data,phId) {
             picture.appendChild(video)
         }
         const figcaption = document.createElement('figcaption')
+        figcaption.setAttribute('data-date',date)
         const h2= document.createElement('h2')
         h2.textContent = title
         const h3 = document.createElement('h3')
