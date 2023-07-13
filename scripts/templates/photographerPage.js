@@ -2,7 +2,6 @@ function photographerInfosSection(data) {
     const { name, city, country, price, portrait, tagline, id } = data;
     const image = `assets/photographers/${portrait}`;
 
-    // FIXME: Mettre le price dans #photographer_price
     const divPrice = document.getElementById('photographer_prices')
     divPrice.textContent = price
 
@@ -46,7 +45,6 @@ function photographerInfosSection(data) {
 }
 
 
-// FIXME: Fonction photographerMediasSection
 
 function mediasTemplate (data,phId) {
     const {photographerId ,title, image, video, likes, date, price, id} = data
@@ -69,7 +67,6 @@ function mediasTemplate (data,phId) {
         const img = document.createElement('img')
         img.setAttribute('src', pict)
         picture.appendChild(img)
-        // FIXME: Faire apparaitre picto sur la vignette
         if (video) {
             const video = document.createElement('div')
             video.setAttribute('class','is_video')
@@ -87,7 +84,6 @@ function mediasTemplate (data,phId) {
         h3.appendChild(span)
         const i = document.createElement('i')
         i.setAttribute('class','fa-solid fa-heart')
-        // FIXME: Button like
         const btLike = document.createElement('button')
         btLike.appendChild(i)
         btLike.setAttribute('class','like_button')

@@ -65,7 +65,6 @@ async function getMediasByID(id) {
 }
 
 function likesIncrement(elem,limite) {
-    // FIXME: Tester et augmenter au click
     let nbLike = Number(elem.textContent)
     if (nbLike<limite) {
         nbLike++
@@ -80,7 +79,6 @@ function totalLikesIncrement(bool) {
     if (bool === true) {
         nbTotalLikes++
     }
-    console.log(nbTotalLikes)
     totalLikes.textContent = nbTotalLikes
 }
 

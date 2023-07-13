@@ -19,7 +19,6 @@ async function displayDataInfos(parameter, element) {
 async function displayDataMedias(id, element) {
     // Les médias
     const medias = await getMediasByID(id)
-    // FIXME: Afficher la somme des likes
 
     let sommeLikes = 0
     let nbLikes = 0
@@ -33,9 +32,23 @@ async function displayDataMedias(id, element) {
             //console.log(nbLikes)
         }
     });
+    // FIXME: Fonction de gestion des likes
+
+    // Gestion des likes
+    const buttonsLikes = document.querySelectorAll('.like_button')
+    buttonsLikes.forEach(element => {
+        const likesSpan = element.parentNode.querySelector('.likes_number')
+        let nbLikeLimit = Number(likesSpan.textContent)+1
+        element.addEventListener('click',function (e) {
+            totalLikesIncrement(likesIncrement(likesSpan,nbLikeLimit))
+        })
+    });
     const photographerLikes = document.getElementById('photographer_likes')
     photographerLikes.textContent = sommeLikes
 }
+
+
+
 
 async function init() {
     const url = document.location.href
@@ -48,13 +61,9 @@ async function init() {
     mediasSection.setAttribute('id','medias')
     main.appendChild(mediasSection)
     const photographerMedias = document.getElementById('medias')
-    const { medias } = await getMediasByID
+    const { medias } = getMediasByID
     displayDataMedias(id,photographerMedias);
 
-
-
-    
-    // DOM Events
     // Contact modal
     const contactModal = document.querySelector('#contact_modal')
 
@@ -70,11 +79,9 @@ async function init() {
 
 init();
 
-// TODO: Gros problème de fonctionnement dés fois oui des fois non
-// FIXME: Traitement de l'incrémentation
 window.onload = function () {
     // DOM
-    const buttonsElements = document.querySelectorAll('.like_button')
+    /*const buttonsElements = document.querySelectorAll('.like_button')
     buttonsElements.forEach(element => {
         const likesSpan = element.parentNode.querySelector('.likes_number')
         let nbLikeLimit = Number(likesSpan.textContent)+1
@@ -82,12 +89,14 @@ window.onload = function () {
             e.preventDefault()
             totalLikesIncrement(likesIncrement(likesSpan,nbLikeLimit))
         })
-    });
-
+    });*/
     // filters DOM
     const filters = document.querySelector('select')
     filters.addEventListener('change',()=>{
-        console.log(filters.childNodes)
+        //console.log(filters.childNodes)
+        filters.childNodes.forEach(option => {
+            console.log(option.value)
+        });
+        
     })
-
   }

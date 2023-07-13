@@ -11,7 +11,7 @@ function titleFilter() {
 }
 
 function filterByName(name) {
-    console.log(name)
+    console.log(name.value)
 }
 
 export {filterByName}

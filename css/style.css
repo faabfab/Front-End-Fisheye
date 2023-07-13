@@ -218,6 +218,7 @@ dialog {
   padding: 100px;
   width: 50%;
   background-color: transparent;
+  overflow: hidden;
 }
 dialog .modal {
   width: 100%;
