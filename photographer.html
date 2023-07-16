@@ -17,12 +17,13 @@
     <main id="main">
       <section id="photographer_infos"></section>
       <div class="filters">
-        <label for="list" class="filters_display">Trier par</label> 
-          <select name="list">
-            <option class="filter_item" value="pop">Popularité</option>
-            <option class="filter_item" value="date">Date</option>                  
-            <option class="filter_item" value="title">Titre</option>
-          </select>
+        <p class="filters_display">Trier par</p>
+        <p class="list_arrow" data-state="close"><i class="fa-solid fa-chevron-down"></i></p>
+        <ul id="filters_list">
+          <li id="filter_item" data-select="true">Popularité</li>
+          <li id="filter_item" class="invisible" data-select="false">Date</li>
+          <li id="filter_item" class="invisible" data-select="false">Titre</li>
+        </ul>
       </div>
     </main>
     <div id="price_likes">

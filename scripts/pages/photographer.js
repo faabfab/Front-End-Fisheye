@@ -3,7 +3,7 @@
 // =============================================================================
 
 
-import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement } from "../utils/utilsModules.js"
+import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
 import { filterByName } from "../utils/mediasFilters.js"
 
@@ -64,6 +64,23 @@ async function init() {
     const { medias } = getMediasByID
     displayDataMedias(id,photographerMedias);
 
+
+    // filters 
+    // FIXME: Liste déroulante
+    const filtersExpand = document.querySelector('.list_arrow')
+    filtersExpand.addEventListener('click', filtersManage)
+    
+    // TODO: Gestion de la sélection de filtre
+    const filtersItems = document.querySelectorAll('#filter_item')
+    filtersItems.forEach(filterItem => {
+        filterItem.addEventListener('click',(e)=>{
+            e.preventDefault()
+            filterSelect(filtersItems,filterItem,filtersExpand)
+        })
+    });
+    
+
+    
     // Contact modal
     const contactModal = document.querySelector('#contact_modal')
 
@@ -77,26 +94,4 @@ async function init() {
     })
 }
 
-init();
-
-window.onload = function () {
-    // DOM
-    /*const buttonsElements = document.querySelectorAll('.like_button')
-    buttonsElements.forEach(element => {
-        const likesSpan = element.parentNode.querySelector('.likes_number')
-        let nbLikeLimit = Number(likesSpan.textContent)+1
-        element.addEventListener('click',function (e) {
-            e.preventDefault()
-            totalLikesIncrement(likesIncrement(likesSpan,nbLikeLimit))
-        })
-    });*/
-    // filters DOM
-    const filters = document.querySelector('select')
-    filters.addEventListener('change',()=>{
-        //console.log(filters.childNodes)
-        filters.childNodes.forEach(option => {
-            console.log(option.value)
-        });
-        
-    })
-  }
+init()

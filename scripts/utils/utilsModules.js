@@ -82,4 +82,68 @@ function totalLikesIncrement(bool) {
     totalLikes.textContent = nbTotalLikes
 }
 
-export {getPhotographers, getPhotographer, getPhotographerId, getMedias, getMediasByID,likesIncrement, totalLikesIncrement}
+// HACK: Conversion en class filterManage en constructor
+function filtersManage () {
+    let state = this.getAttribute('data-state')
+    const filterItem = document.querySelectorAll('#filter_item')
+    switch (state) {
+        case 'close':
+            filterItem.forEach(filter => {
+                filter.removeAttribute('class')
+            });        
+            this.innerHTML = '<i class="fa-solid fa-chevron-up">'
+            this.setAttribute('data-state','open')
+            break;
+        case 'open' :
+            filterItem.forEach(filter => {
+                if (filter.getAttribute('data-select') == 'false') {
+                    filter.setAttribute('class','invisible')
+                }
+            });
+            this.innerHTML = '<i class="fa-solid fa-chevron-down">'
+            this.setAttribute('data-state','close')
+            break
+        default:
+            break;
+    }
+}
+
+function filterSelect(listItems, item, arrowElement) {
+    // TODO: Changer l'ordre de la liste
+    let select // selected element
+    let name = item.textContent
+    const ulNode = document.getElementById('filters_list')
+    // TODO: ... avec appendChild
+    let list = ''
+    listItems.forEach(itemElement => {
+
+       if (itemElement.textContent != name) {      
+  
+            itemElement.setAttribute('data-select','false')
+            itemElement.setAttribute('class','invisible')
+            list = list + itemElement
+        } else{
+            itemElement.setAttribute('data-select','true')
+            select = itemElement
+            ulNode.removeChild(itemElement)
+        }
+    });
+
+    ulNode.prepend(select)
+    console.log(ulNode)
+
+    arrowElement.innerHTML = '<i class="fa-solid fa-chevron-down">'
+    arrowElement.setAttribute('data-state','close')
+    console.log('selected: '+item.textContent)
+}
+
+export {
+    filtersManage,
+    getPhotographers,
+    getPhotographer,
+    getPhotographerId,
+    getMedias,
+    getMediasByID,likesIncrement,
+    totalLikesIncrement,
+    filterSelect
+}

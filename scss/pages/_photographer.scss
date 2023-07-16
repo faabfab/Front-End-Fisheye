@@ -164,27 +164,41 @@ dialog{
     font-family: DM Sans;
     font-size: 18px;
     font-weight: 700;
-    & select{
-        margin-left: 20px ;
-        padding: 0px;
-        width: 170px;
+    & ul, p.list_arrow{
+        z-index: 11;
+        position: absolute;
+        top: 420px;
+        list-style-type: none;
+        padding: 10px;
+        color: white;
+        left: 180px;
+        width: 150px;
+        cursor: pointer;
+    }
+    & p.list_arrow{
+        text-align: right;
+        padding-top: 20px;
+    }
+    & ul{
+        z-index: 10;
         border-radius: 4px;
         box-shadow: 0px 4px 4px 0px #00000040;
         border: none;
         background-color: #901C1C;
-        height: 50px;
-        border-radius: 4px;
-        color: white;
         font-size: 18px;
-        &-wrapper::after {
-            content: "g";
-        }
-
-        & option.filter_item{
-            :hover{
-                background-color: transparent;
-            }
+        & li{
+            padding: 10px;
+            border-bottom-color: white;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            cursor: pointer;
         }
     }
 }
+
+.invisible{
+    display : none;
+}
+    
+
 
