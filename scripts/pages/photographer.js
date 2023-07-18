@@ -5,7 +5,6 @@
 
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
-import { filterByName } from "../utils/mediasFilters.js"
 
 const main = document.querySelector('main')
 const photographerInfos = document.querySelector('#photographer_infos')
@@ -45,6 +44,22 @@ async function displayDataMedias(id, element) {
     });
     const photographerLikes = document.getElementById('photographer_likes')
     photographerLikes.textContent = sommeLikes
+
+    // FIXME: Gestion des filtres, récupération des articles
+    // Filters
+
+    // FIXME: Liste déroulante
+    const filtersExpand = document.querySelector('.list_arrow')
+    filtersExpand.addEventListener('click', filtersManage)
+    
+    // FIXME: Gestion de la sélection de filtre
+    const filtersItems = document.querySelectorAll('#filter_item')
+    filtersItems.forEach(filterItem => {
+        filterItem.addEventListener('click',(e)=>{
+            e.preventDefault()
+            filterSelect(filtersItems,filterItem,filtersExpand)
+        })
+    });
 }
 
 
@@ -61,23 +76,11 @@ async function init() {
     mediasSection.setAttribute('id','medias')
     main.appendChild(mediasSection)
     const photographerMedias = document.getElementById('medias')
-    const { medias } = getMediasByID
+    const { PhotographMedias } = getMediasByID(photograph)
     displayDataMedias(id,photographerMedias);
 
 
-    // filters 
-    // FIXME: Liste déroulante
-    const filtersExpand = document.querySelector('.list_arrow')
-    filtersExpand.addEventListener('click', filtersManage)
     
-    // TODO: Gestion de la sélection de filtre
-    const filtersItems = document.querySelectorAll('#filter_item')
-    filtersItems.forEach(filterItem => {
-        filterItem.addEventListener('click',(e)=>{
-            e.preventDefault()
-            filterSelect(filtersItems,filterItem,filtersExpand)
-        })
-    });
     
 
     

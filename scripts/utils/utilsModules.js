@@ -1,3 +1,6 @@
+import { mediasDatasReturn } from "./filtersModules.js";
+
+
 /**
  * Fonction qui récupère les données du fichiers photographers.json
  * @returns Tableaux des photographes
@@ -109,19 +112,18 @@ function filtersManage () {
 }
 
 function filterSelect(listItems, item, arrowElement) {
-    // TODO: Changer l'ordre de la liste
+    // FIXME: Changer l'ordre de la liste
     let select // selected element
     let name = item.textContent
+    let tab = []
     const ulNode = document.getElementById('filters_list')
-    // TODO: ... avec appendChild
-    let list = ''
+    // FIXME: ... avec appendChild
     listItems.forEach(itemElement => {
 
        if (itemElement.textContent != name) {      
   
             itemElement.setAttribute('data-select','false')
             itemElement.setAttribute('class','invisible')
-            list = list + itemElement
         } else{
             itemElement.setAttribute('data-select','true')
             select = itemElement
@@ -130,11 +132,16 @@ function filterSelect(listItems, item, arrowElement) {
     });
 
     ulNode.prepend(select)
-    console.log(ulNode)
+
+    tab = mediasDatasReturn(name)
+    tab.forEach(article => {
+        // Affichage
+        const medias = document.querySelector('#medias')
+        medias.appendChild(article.element)
+    });
 
     arrowElement.innerHTML = '<i class="fa-solid fa-chevron-down">'
     arrowElement.setAttribute('data-state','close')
-    console.log('selected: '+item.textContent)
 }
 
 export {
