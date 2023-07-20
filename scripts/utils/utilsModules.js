@@ -101,6 +101,8 @@ function filtersManage () {
             filterItem.forEach(filter => {
                 if (filter.getAttribute('data-select') == 'false') {
                     filter.setAttribute('class','invisible')
+                } else{
+                    filter.setAttribute('class','no_border')
                 }
             });
             this.innerHTML = '<i class="fa-solid fa-chevron-down">'
@@ -112,20 +114,18 @@ function filtersManage () {
 }
 
 function filterSelect(listItems, item, arrowElement) {
-    // FIXME: Changer l'ordre de la liste
     let select // selected element
     let name = item.textContent
     let tab = []
     const ulNode = document.getElementById('filters_list')
-    // FIXME: ... avec appendChild
     listItems.forEach(itemElement => {
-
        if (itemElement.textContent != name) {      
-  
             itemElement.setAttribute('data-select','false')
+            itemElement.removeAttribute('class','no_border')
             itemElement.setAttribute('class','invisible')
         } else{
             itemElement.setAttribute('data-select','true')
+            itemElement.setAttribute('class','no_border')
             select = itemElement
             ulNode.removeChild(itemElement)
         }

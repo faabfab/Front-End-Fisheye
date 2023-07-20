@@ -151,10 +151,8 @@ h2, h3, .like_button, .all_like_button {
   width: 350px;
   margin-bottom: 20px;
 }
-#medias .media a {
-  text-decoration: none;
-}
-#medias .media a picture {
+#medias .media picture {
+  cursor: pointer;
   position: relative;
   width: 350px;
   height: 300px;
@@ -164,11 +162,14 @@ h2, h3, .like_button, .all_like_button {
   align-items: center;
   border-radius: 5px;
 }
-#medias .media a picture img {
+#medias .media picture img {
   min-height: 300px;
   min-width: 350px;
   -o-object-fit: cover;
      object-fit: cover;
+}
+#medias .media a {
+  text-decoration: none;
 }
 #medias .media figcaption {
   display: flex;
@@ -294,4 +295,55 @@ dialog form textarea, dialog form input {
 
 .invisible {
   display: none;
+}
+
+.no_border {
+  border-width: 0px !important;
+}
+
+#lightbox {
+  max-width: 100%;
+  width: 90%;
+  margin-top: 60px;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+#lightbox .lightbox_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+}
+#lightbox .lightbox_content_close_button, #lightbox .lightbox_content .left, #lightbox .lightbox_content .right {
+  color: #901C1C;
+  font-size: 42px;
+  cursor: pointer;
+}
+#lightbox .lightbox_content_img {
+  width: 100%;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#lightbox .lightbox_content_img img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+#lightbox .lightbox_content .right {
+  padding-right: 20px;
+}
+#lightbox .lightbox_content .left {
+  padding-left: 20px;
+}
+#lightbox .lightbox_content_close_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }/*# sourceMappingURL=style.css.map */

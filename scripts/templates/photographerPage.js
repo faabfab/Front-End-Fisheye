@@ -5,8 +5,6 @@ function photographerInfosSection(data) {
     const divPrice = document.getElementById('photographer_prices')
     divPrice.textContent = price
 
-    //divPrice.textContent(price)
-
     const infosSection = document.createElement('section')
     infosSection.setAttribute('id','header')
     infosSection.setAttribute('class','photograph-header')
@@ -61,9 +59,8 @@ function mediasTemplate (data,phId) {
         
         const article = document.createElement('article')
         article.setAttribute('class', 'media')
-        const a = document.createElement('a')
-        a.setAttribute('href', '#')
         const picture = document.createElement('picture')
+        picture.setAttribute('id','lightbox_button')
         const img = document.createElement('img')
         img.setAttribute('src', pict)
         picture.appendChild(img)
@@ -90,12 +87,14 @@ function mediasTemplate (data,phId) {
         h3.appendChild(btLike)
         figcaption.appendChild(h2)
         figcaption.appendChild(h3)
-        a.appendChild(picture)
-        article.appendChild(a)
+        article.appendChild(picture)
         article.appendChild(figcaption)
 
         return article
     }
+
+    
+
     return {photographerId, title, image, likes, date, price, getMediasCardDOM}
 }
 

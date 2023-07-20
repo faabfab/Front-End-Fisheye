@@ -55,23 +55,24 @@ h2, h3, .like_button, .all_like_button{
         flex-direction: column;
         width: 350px;
         margin-bottom: 20px;
+        & picture {
+            cursor: pointer;
+            position: relative;
+            width: 350px;
+            height: 300px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            & img{
+                min-height: 300px;
+                min-width: 350px;
+                object-fit: cover;
+            }
+        }
         & a{
             text-decoration: none;
-            & picture {
-                position: relative;
-                width: 350px;
-                height: 300px;
-                overflow: hidden;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 5px;
-                & img{
-                    min-height: 300px;
-                    min-width: 350px;
-                    object-fit: cover;
-                }
-            }
         }
         & figcaption {
             display: flex;
@@ -199,6 +200,54 @@ dialog{
 .invisible{
     display : none;
 }
-    
 
+.no_border{
+    border-width: 0px !important;
+}
+
+#lightbox{
+    max-width: 100%;
+    width: 90%;
+    margin-top: 60px;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    & .lightbox_content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        width: 100%;
+        &_close_button, .left, .right{
+            color: #901C1C;
+            font-size: 42px;
+            cursor: pointer;
+        }
+        &_img{
+            width:100%;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            & img{
+                object-fit: contain;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        & .right{
+            padding-right: 20px;
+        }
+        & .left{
+            padding-left: 20px;
+        }
+        &_close_button{
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    }
+}
 

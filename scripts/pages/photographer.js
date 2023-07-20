@@ -5,6 +5,7 @@
 
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
+import { openLightbox } from "../utils/lightbox.js"
 
 const main = document.querySelector('main')
 const photographerInfos = document.querySelector('#photographer_infos')
@@ -28,10 +29,9 @@ async function displayDataMedias(id, element) {
             nbLikes = mediasTemplate(media,id).likes
             const mediaCardDOM = mediaModel.getMediasCardDOM()
             element.appendChild(mediaCardDOM)
-            //console.log(nbLikes)
+
         }
     });
-    // FIXME: Fonction de gestion des likes
 
     // Gestion des likes
     const buttonsLikes = document.querySelectorAll('.like_button')
@@ -45,14 +45,10 @@ async function displayDataMedias(id, element) {
     const photographerLikes = document.getElementById('photographer_likes')
     photographerLikes.textContent = sommeLikes
 
-    // FIXME: Gestion des filtres, récupération des articles
     // Filters
-
-    // FIXME: Liste déroulante
     const filtersExpand = document.querySelector('.list_arrow')
     filtersExpand.addEventListener('click', filtersManage)
     
-    // FIXME: Gestion de la sélection de filtre
     const filtersItems = document.querySelectorAll('#filter_item')
     filtersItems.forEach(filterItem => {
         filterItem.addEventListener('click',(e)=>{
@@ -60,6 +56,23 @@ async function displayDataMedias(id, element) {
             filterSelect(filtersItems,filterItem,filtersExpand)
         })
     });
+
+    // TODO: Lightbox event
+    const lightbox = document.querySelector('#lightbox')
+    const lightboxButtons = document.querySelectorAll('#lightbox_button')
+    const closeLightboxButton = document.querySelector('.lightbox_content_close_button')
+    lightboxButtons.forEach(lightboxButton => {
+        lightboxButton.addEventListener('click', ()=>{
+            lightbox.showModal()
+            //console.log(lightboxButton.parentElement)
+            openLightbox(lightboxButton.parentElement)
+        })
+    });
+    closeLightboxButton.addEventListener('click', ()=>{
+        lightbox.close()
+    })
+
+
 }
 
 
