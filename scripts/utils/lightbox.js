@@ -1,26 +1,36 @@
-function itemPosition(tabItems,item) {
-    let i = 0
-    tabItems.forEach(e => {
-        console.log(e != item)
-        if (e != item) {
-            i++
-        } else{
-            return i
-        }  
-        // TODO: Tant que l'élément sélctionné est différent de lélément on le met dans tabBefore
 
-    });
+// FIXME: Fonction d'affichage d'un élément du tableau avec les flèches
+function displayLightboxElement(tab,index) {
+    let lightbox = document.querySelector('#lightbox')
+    let lightboxContentOld = document.querySelector('.lightbox_content')
+
+    let title = tab[index].querySelector('h2')
+    let img = tab[index].querySelector('img')
+    let src = img.getAttribute('src')
+
+    let lightboxContent = document.createElement('div')
+    lightboxContent.setAttribute('class','lightbox_content')
+    let lightboxContentImg = document.createElement('div')
+    lightboxContentImg.setAttribute('class','lightbox_content_img')
+    let image = document.createElement('img')
+    image.setAttribute('src', src)
+    let h1 = document.createElement('h1')
+    h1.textContent = title.textContent
+    lightboxContentImg.appendChild(image)
+    lightboxContent.appendChild(lightboxContentImg)
+    lightboxContent.appendChild(h1)
+    lightbox.appendChild(lightboxContent)
+
 }
 
-
 function openLightbox(element) {
-    console.log(element)
-    // TODO: Faire un tableau qui démarre de l'élément sélectionné et l'afficher
+
+    // FIXME: Faire un tableau qui démarre de l'élément sélectionné
     const articlesMedias = document.querySelectorAll('article')
-    let tabBefore = []
-    let tab = Object.values(articlesMedias)
-    console.log(tab.indexOf(element)) // position de l'élément
-    
+    let tab = Object.values(articlesMedias) //conversion object en tab
+    let elementIndex = tab.indexOf(element)
+
+    displayLightboxElement(tab,elementIndex)
 }
 
 export{

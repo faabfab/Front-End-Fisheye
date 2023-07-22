@@ -302,24 +302,22 @@ dialog form textarea, dialog form input {
 }
 
 #lightbox {
+  position: relative;
   max-width: 100%;
   width: 90%;
   margin-top: 60px;
   padding-top: 0px;
   padding-left: 0px;
   padding-right: 0px;
-}
-#lightbox .lightbox_content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  width: 100%;
 }
-#lightbox .lightbox_content_close_button, #lightbox .lightbox_content .left, #lightbox .lightbox_content .right {
-  color: #901C1C;
-  font-size: 42px;
-  cursor: pointer;
+#lightbox .lightbox_content {
+  background-color: white;
+  width: 100%;
+  order: 2;
 }
 #lightbox .lightbox_content_img {
   width: 100%;
@@ -336,14 +334,21 @@ dialog form textarea, dialog form input {
   width: 100%;
   height: 100%;
 }
-#lightbox .lightbox_content .right {
-  padding-right: 20px;
-}
-#lightbox .lightbox_content .left {
-  padding-left: 20px;
-}
 #lightbox .lightbox_content_close_button {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+#lightbox .lightbox_content_close_button, #lightbox .left, #lightbox .right {
+  color: #901C1C;
+  font-size: 42px;
+  cursor: pointer;
+}
+#lightbox .right {
+  order: 3;
+  padding-right: 20px;
+}
+#lightbox .left {
+  order: 1;
+  padding-left: 20px;
 }/*# sourceMappingURL=style.css.map */

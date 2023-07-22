@@ -57,21 +57,24 @@ async function displayDataMedias(id, element) {
         })
     });
 
-    // TODO: Lightbox event
+    // Lightbox events
     const lightbox = document.querySelector('#lightbox')
     const lightboxButtons = document.querySelectorAll('#lightbox_button')
     const closeLightboxButton = document.querySelector('.lightbox_content_close_button')
     lightboxButtons.forEach(lightboxButton => {
         lightboxButton.addEventListener('click', ()=>{
             lightbox.showModal()
-            //console.log(lightboxButton.parentElement)
             openLightbox(lightboxButton.parentElement)
         })
     });
     closeLightboxButton.addEventListener('click', ()=>{
+        // Efface l'élément avant de fermer
         lightbox.close()
+        let lightboxContentOld = document.querySelector('.lightbox_content')
+        lightboxContentOld.remove()
     })
-
+    // TODO: Arrows events
+    // TODO: Dialog lightbox prb
 
 }
 
@@ -91,11 +94,6 @@ async function init() {
     const photographerMedias = document.getElementById('medias')
     const { PhotographMedias } = getMediasByID(photograph)
     displayDataMedias(id,photographerMedias);
-
-
-    
-    
-
     
     // Contact modal
     const contactModal = document.querySelector('#contact_modal')

@@ -206,48 +206,55 @@ dialog{
 }
 
 #lightbox{
+    position: relative;
     max-width: 100%;
     width: 90%;
     margin-top: 60px;
     padding-top: 0px;
     padding-left: 0px;
     padding-right: 0px;
-    & .lightbox_content{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: white;
-        width: 100%;
-        &_close_button, .left, .right{
-            color: #901C1C;
-            font-size: 42px;
-            cursor: pointer;
-        }
-        &_img{
-            width:100%;
-            height: 800px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            & img{
-                object-fit: contain;
-                width: 100%;
-                height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    & .lightbox{
+        &_content{
+            background-color: white;
+            width: 100%;
+            order: 2;
+            &_img{
+                width:100%;
+                height: 800px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                & img{
+                    object-fit: contain;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            &_close_button{
+                position: absolute;
+                top: 20px;
+                right: 20px;
             }
         }
-        & .right{
-            padding-right: 20px;
-        }
-        & .left{
-            padding-left: 20px;
-        }
-        &_close_button{
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
+    }
+    & .lightbox_content_close_button, .left, .right{
+        color: #901C1C;
+        font-size: 42px;
+        cursor: pointer;
+    }
+    & .right{
+        order: 3;
+        padding-right: 20px;
+    }
+    & .left{
+        order: 1;
+        padding-left: 20px;
     }
 }
 
