@@ -309,10 +309,12 @@ dialog form textarea, dialog form input {
   padding-top: 0px;
   padding-left: 0px;
   padding-right: 0px;
+  background-color: white;
+}
+#lightbox .lightbox {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
 }
 #lightbox .lightbox_content {
   background-color: white;
@@ -338,6 +340,7 @@ dialog form textarea, dialog form input {
   position: absolute;
   top: 20px;
   right: 20px;
+  order: 4;
 }
 #lightbox .lightbox_content_close_button, #lightbox .left, #lightbox .right {
   color: #901C1C;

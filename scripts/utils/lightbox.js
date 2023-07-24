@@ -1,13 +1,15 @@
 
 // FIXME: Fonction d'affichage d'un élément du tableau avec les flèches
-function displayLightboxElement(tab,index) {
-    let lightbox = document.querySelector('#lightbox')
-    let lightboxContentOld = document.querySelector('.lightbox_content')
 
+function displayInLightbox(el,element) {
+    element.appendChild(el)
+}
+
+function lightboxElements(tab,index) {
     let title = tab[index].querySelector('h2')
     let img = tab[index].querySelector('img')
     let src = img.getAttribute('src')
-
+    
     let lightboxContent = document.createElement('div')
     lightboxContent.setAttribute('class','lightbox_content')
     let lightboxContentImg = document.createElement('div')
@@ -19,20 +21,20 @@ function displayLightboxElement(tab,index) {
     lightboxContentImg.appendChild(image)
     lightboxContent.appendChild(lightboxContentImg)
     lightboxContent.appendChild(h1)
-    lightbox.appendChild(lightboxContent)
 
+    return lightboxContent
+    
 }
 
-function openLightbox(element) {
-
-    // FIXME: Faire un tableau qui démarre de l'élément sélectionné
-    const articlesMedias = document.querySelectorAll('article')
-    let tab = Object.values(articlesMedias) //conversion object en tab
-    let elementIndex = tab.indexOf(element)
-
-    displayLightboxElement(tab,elementIndex)
+function indexLightboxElement(tab) {
+    let lightboxElement = document.querySelector('.lightbox_content')
+    let indexContent = tab.indexOf(lightboxElement)
+    lightboxElement.remove()
+    return indexContent
 }
 
 export{
-    openLightbox
+    lightboxElements,
+    displayInLightbox,
+    indexLightboxElement
 }

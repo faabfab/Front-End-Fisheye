@@ -5,7 +5,7 @@
 
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
-import { openLightbox } from "../utils/lightbox.js"
+import { lightboxElements, displayInLightbox, indexLightboxElement } from "../utils/lightbox.js"
 
 const main = document.querySelector('main')
 const photographerInfos = document.querySelector('#photographer_infos')
@@ -58,13 +58,24 @@ async function displayDataMedias(id, element) {
     });
 
     // Lightbox events
+
+    const articlesMedias = document.querySelectorAll('article')
+    const tabData = Object.values(articlesMedias) //conversion object en tab
+    //console.log(tabData)
+
     const lightbox = document.querySelector('#lightbox')
+    const lightboxClass = document.querySelector('.lightbox')
     const lightboxButtons = document.querySelectorAll('#lightbox_button')
+    const elementsArray = [] //tableau des éléments de la lightbox
+    lightboxButtons.forEach(element => {
+        elementsArray.push(lightboxElements(tabData,tabData.indexOf(element.parentElement)))
+    });
+
     const closeLightboxButton = document.querySelector('.lightbox_content_close_button')
     lightboxButtons.forEach(lightboxButton => {
         lightboxButton.addEventListener('click', ()=>{
             lightbox.showModal()
-            openLightbox(lightboxButton.parentElement)
+            displayInLightbox(elementsArray[tabData.indexOf(lightboxButton.parentElement)],lightboxClass)
         })
     });
     closeLightboxButton.addEventListener('click', ()=>{
@@ -73,12 +84,32 @@ async function displayDataMedias(id, element) {
         let lightboxContentOld = document.querySelector('.lightbox_content')
         lightboxContentOld.remove()
     })
-    // TODO: Arrows events
-    // TODO: Dialog lightbox prb
+    // FIXME: Dialog lightbox prb
+
+    // FIXME: Arrows events    
+    const previousBtn = document.querySelector('.left')
+    const nextBtn = document.querySelector('.right')
+
+    previousBtn.addEventListener('click',()=>{
+        let indexContent = indexLightboxElement(elementsArray)
+        if (indexContent>0) {            
+            displayInLightbox(elementsArray[indexContent-1],lightboxClass)
+        } else {
+            displayInLightbox(elementsArray[elementsArray.length-1],lightboxClass)
+        }
+    })
+    
+    nextBtn.addEventListener('click',()=>{
+        // TODO: Bon principe. Faire test si en fin de tableau
+        let indexContent = indexLightboxElement(elementsArray)
+        if (indexContent<(elementsArray.length-1)) {            
+            displayInLightbox(elementsArray[indexContent+1],lightboxClass)
+        } else {
+            displayInLightbox(elementsArray[0],lightboxClass)
+        }
+    })
 
 }
-
-
 
 
 async function init() {
