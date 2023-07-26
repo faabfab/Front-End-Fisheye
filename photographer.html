@@ -49,27 +49,36 @@
           <img src="assets/icons/close.svg" class="closeButton"/>
         </header>
         <!-- TODO: Que mettre dans la form  -->
-        <form id="contactForm" name="contact" action="">
+        <form id="contactForm" name="contact">
           <div class="formData" id="firstData">
-						<label id="first" for="first">Prénom</label>
+						<label for="first">Prénom</label>
 						<input type="text" id="first" name="first">
 					</div>
           <div class="formData" id="lastData">
-						<label id="last" for="last">Nom</label>
+						<label for="last">Nom</label>
 						<input type="text" id="last" name="last">
 					</div>
           <div class="formData" id="emailData">
-						<label id="email" for="email">Email</label>
+						<label for="email">Email</label>
 						<input type="email" id="email" name="email">
 					</div>
           <div class="formData" id="messageData">
-						<label id="message" for="message">Votre message</label>
-						<textarea id="massage" name="message"></textarea>
+						<label for="message">Votre message</label>
+						<textarea id="message" name="message" type="text"></textarea>
 					</div>
-          <button class="contact_button" type="submit">Envoyer</button>
 				</form>
+        <!-- HACK: Button hors form -->
+        <button id="submit_button" class="contact_button" type="submit">Envoyer</button>
 			</div>
 		</dialog>
+    <dialog id="contact_modal_confirm">
+      <div class="modal">
+        <header>
+          <h3>Votre message a été envoyé</h3>
+          <img id="close_confirm_button" src="assets/icons/close.svg" class="closeButton"/>
+        </header>
+      </div>
+    </dialog>
     <script src="/scripts/pages/photographer.js" type="module"></script>
   </body>
 </html>

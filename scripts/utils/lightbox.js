@@ -28,8 +28,10 @@ function lightboxElements(tab,index) {
 
 function indexLightboxElement(tab) {
     let lightboxElement = document.querySelector('.lightbox_content')
+    //console.log(lightboxElement)
     let indexContent = tab.indexOf(lightboxElement)
     lightboxElement.remove()
+    //console.log(indexContent)
     return indexContent
 }
 

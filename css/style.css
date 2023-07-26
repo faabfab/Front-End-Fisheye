@@ -354,4 +354,24 @@ dialog form textarea, dialog form input {
 #lightbox .left {
   order: 1;
   padding-left: 20px;
+}
+
+.formData[data-error]::after {
+  content: attr(data-error);
+  color: #e54858;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: right;
+  line-height: 0.3;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.formData[data-error-visible=true]::after {
+  opacity: 1;
+}
+
+.formData[data-error-visible=true] .text-control {
+  border: 2px solid #e54858;
 }/*# sourceMappingURL=style.css.map */
