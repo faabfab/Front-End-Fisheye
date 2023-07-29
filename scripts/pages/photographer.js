@@ -83,6 +83,9 @@ async function displayDataMedias(id, element) {
 
 
     // Lightbox events
+
+    // TODO: FAIRE LE TRAITEMENT DES VIDEOS
+
     const closeLightboxButton = document.querySelector('.lightbox_content_close_button')
     closeLightboxButton.addEventListener('click', ()=>{
         let lightboxContentOld = document.querySelector('.lightbox_content')

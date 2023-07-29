@@ -9,13 +9,27 @@ function lightboxElements(tab,index) {
     let title = tab[index].querySelector('h2')
     let img = tab[index].querySelector('img')
     let src = img.getAttribute('src')
-    
+    // TODO: Tester si c'est une vidéo
     let lightboxContent = document.createElement('div')
     lightboxContent.setAttribute('class','lightbox_content')
     let lightboxContentImg = document.createElement('div')
     lightboxContentImg.setAttribute('class','lightbox_content_img')
-    let image = document.createElement('img')
-    image.setAttribute('src', src)
+    let image
+    if (tab[index].querySelector('.is_video')) {
+        console.log("c'est une vidéo")
+        image = document.createElement('video')
+        image.setAttribute('controls','')
+        image.setAttribute('width','90%')
+        let source = document.createElement('source')
+        source.setAttribute('type','video/mp4')
+        src = src.replace('.jpg','.mp4')
+        source.setAttribute('src', src)
+        image.appendChild(source)
+    } else {
+        console.log("c'est pas une vidéo")
+        image = document.createElement('img')
+        image.setAttribute('src', src)
+    }
     let h1 = document.createElement('h1')
     h1.textContent = title.textContent
     lightboxContentImg.appendChild(image)
@@ -29,13 +43,26 @@ function lightboxElementByElement(element) {
     let title = element.parentElement.querySelector('h2')
     let img = element.parentElement.querySelector('img')
     let src = img.getAttribute('src')
-    
     let lightboxContent = document.createElement('div')
     lightboxContent.setAttribute('class','lightbox_content')
     let lightboxContentImg = document.createElement('div')
     lightboxContentImg.setAttribute('class','lightbox_content_img')
-    let image = document.createElement('img')
-    image.setAttribute('src', src)
+    let image
+    if (element.querySelector('.is_video')) {
+        console.log("c'est une vidéo")
+        image = document.createElement('video')
+        image.setAttribute('controls','')
+        image.setAttribute('width','90%')
+        let source = document.createElement('source')
+        source.setAttribute('type','video/mp4')
+        src = src.replace('.jpg','.mp4')
+        source.setAttribute('src', src)
+        image.appendChild(source)
+    } else {
+        console.log("c'est pas une vidéo")
+        image = document.createElement('img')
+        image.setAttribute('src', src)
+    }
     let h1 = document.createElement('h1')
     h1.textContent = title.textContent
     lightboxContentImg.appendChild(image)
