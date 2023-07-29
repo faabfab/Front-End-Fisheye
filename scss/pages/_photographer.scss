@@ -209,11 +209,17 @@ dialog{
     position: relative;
     max-width: 100%;
     width: 90%;
-    margin-top: 60px;
+    left: 5%;
+    //margin-top: 60px;
     padding-top: 0px;
     padding-left: 0px;
     padding-right: 0px;
     background-color: white;
+    //div
+    position: fixed;
+    top: 50px;
+    z-index: 20;
+    //
     & .lightbox{
         display: flex;
         justify-content: space-between;

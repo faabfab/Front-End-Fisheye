@@ -5,7 +5,7 @@
 
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
-import { lightboxElements, displayInLightbox, indexLightboxElement } from "../utils/lightbox.js"
+import { displayInLightbox, lightboxButtonsInit, lightboxElementIndex,lightboxElementByElement } from "../utils/lightbox.js"
 import { submit, isFirst, isLast, isEmail, isMessage } from "../utils/contactForm.js"
 
 const main = document.querySelector('main')
@@ -46,98 +46,69 @@ async function displayDataMedias(id, element) {
     const photographerLikes = document.getElementById('photographer_likes')
     photographerLikes.textContent = sommeLikes
 
+    // Lightbox table init
+    let articlesMedias = document.querySelectorAll('article')
+    let tabData = Object.values(articlesMedias) //conversion object en tab
+
+    const lightbox = document.querySelector('#lightbox')
+    const lightboxClass = document.querySelector('.lightbox')
+    //
+    let elementsArrayInitials = []
+    elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
+    //
+
     // Filters
     const filtersExpand = document.querySelector('.list_arrow')
     filtersExpand.addEventListener('click', filtersManage)
     
     const filtersItems = document.querySelectorAll('#filter_item')
-    const elementsArrayFilters = [] //tableau des éléments de la lightbox
+
     filtersItems.forEach(filterItem => {
         filterItem.addEventListener('click',(e)=>{
             e.preventDefault()
+            //remove old element
+            let lightboxContentOld = document.querySelector('.lightbox_content')
+            if (lightboxContentOld) {
+                lightboxContentOld.remove()
+            }
             filterSelect(filtersItems,filterItem,filtersExpand)
-            // TODO: Faire tableau de la lightbox ici
-            // TODO: Renvoyer le tableau le transmettre au listener des flèches
-            // BUG: ::backdrop dans element quand la dialog est ouverte
-            let lightboxButtons = document.querySelectorAll('#lightbox_button')
-            lightboxButtons.forEach(element => {
-                elementsArrayFilters.push(lightboxElements(tabData,tabData.indexOf(element.parentElement)))
-                console.log(lightboxElements(tabData,tabData.indexOf(element.parentElement)))
-            });            
-            //console.log(elementsArrayFilters)
+            // on change le tableau de la lightbox
+            let articlesMedias = document.querySelectorAll('article')
+            let tabData = Object.values(articlesMedias) //conversion object en tab
+            elementsArrayInitials = []
+            elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
         })
     });
+
+
 
     // Lightbox events
-
-    const articlesMedias = document.querySelectorAll('article')
-    const tabData = Object.values(articlesMedias) //conversion object en tab
-    //console.log(tabData)
-
-    const lightbox = document.querySelector('#lightbox')
-    const lightboxClass = document.querySelector('.lightbox')
-    let lightboxButtons = document.querySelectorAll('#lightbox_button')
-    // TODO: Faire le tableau juste avant l'ouverture de la modale
-    let elementsArrayInitials = [] //tableau des éléments de la lightbox
-    lightboxButtons.forEach(element => {
-        elementsArrayInitials.push(lightboxElements(tabData,tabData.indexOf(element.parentElement)))
-    });
-
-    lightboxButtons.forEach(lightboxButton => {
-        //elementsArray.push(lightboxElements(tabData,tabData.indexOf(lightboxButton.parentElement)))
-        lightboxButton.addEventListener('click', ()=>{
-            displayInLightbox(elementsArrayInitials[tabData.indexOf(lightboxButton.parentElement)],lightboxClass)
-            lightbox.showModal()
-        })
-    });
-
     const closeLightboxButton = document.querySelector('.lightbox_content_close_button')
     closeLightboxButton.addEventListener('click', ()=>{
-        // Efface l'élément avant de fermer
-        lightbox.close()
         let lightboxContentOld = document.querySelector('.lightbox_content')
         lightboxContentOld.remove()
+        lightbox.setAttribute('class','invisible')
     })
-    // FIXME: Dialog lightbox prb
-
-    // FIXME: Arrows events    
+ 
     const previousBtn = document.querySelector('.left')
     const nextBtn = document.querySelector('.right')
 
-    previousBtn.addEventListener('click',()=>{
-        //console.log(elementsArrayInitials.length)
-        //console.log(elementsArrayFilters.length)
-        
-        /*if (elementsArrayFilters.length==0) {
-            console.log(indexLightboxElement(elementsArrayInitials))
-            let indexContent = indexLightboxElement(elementsArrayInitials)
-            console.log(indexContent)
-            console.log(elementsArrayInitials)
-            if (indexContent>0) {            
-                displayInLightbox(elementsArrayInitials[indexContent-1],lightboxClass)
-            } else {
-                displayInLightbox(elementsArrayInitials[elementsArrayInitials.length-1],lightboxClass)
+    const lightboxButtons = document.querySelectorAll('#lightbox_button')
+    lightboxButtons.forEach(lightboxButton => {
+        lightboxButton.addEventListener('click', ()=>{
+            let lightboxContentOld = document.querySelector('.lightbox_content')
+            if (lightboxContentOld) {
+                lightboxContentOld.remove()
             }
-        } else{
-            let indexContent = indexLightboxElement(elementsArrayFilters)
-            console.log(indexContent)
-            //console.log(elementsArrayFilters)
-            elementsArrayFilters.forEach(element => {
-                let test = Object.keys(element)
-                console.log(getComputedStyle(element,'::backdrop'))
-            });
-            if (indexContent>0) {            
-                displayInLightbox(elementsArrayFilters[indexContent-1],lightboxClass)
-            } else {
-                displayInLightbox(elementsArrayFilters[elementsArrayFilters.length-1],lightboxClass)
-            }
+            let el = lightboxElementByElement(lightboxButton)
+            displayInLightbox(el,lightboxClass)
+            lightbox.removeAttribute('class')
+        })
+    });
 
-        }*/
-        let indexContent = indexLightboxElement(elementsArrayInitials)
-        elementsArrayFilters.forEach(element => {
-            
-            console.log(element)
-        });
+    previousBtn.addEventListener('click',()=>{
+        let lightboxEl = document.querySelector('.lightbox_content')
+        let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
         if (indexContent>0) {            
             displayInLightbox(elementsArrayInitials[indexContent-1],lightboxClass)
         } else {
@@ -146,10 +117,10 @@ async function displayDataMedias(id, element) {
     })
 
     nextBtn.addEventListener('click',()=>{
-        // FIXME: Bon principe. Faire test si en fin de tableau
+        let lightboxEl = document.querySelector('.lightbox_content')
+        let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
 
-        let indexContent = indexLightboxElement(elementsArrayInitials)
-        if (indexContent<(elementsArrayInitials.length-1)) {            
+        if (indexContent<(elementsArrayInitials.length-1)) {           
             displayInLightbox(elementsArrayInitials[indexContent+1],lightboxClass)
         } else {
             displayInLightbox(elementsArrayInitials[0],lightboxClass)

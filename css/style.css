@@ -305,11 +305,14 @@ dialog form textarea, dialog form input {
   position: relative;
   max-width: 100%;
   width: 90%;
-  margin-top: 60px;
+  left: 5%;
   padding-top: 0px;
   padding-left: 0px;
   padding-right: 0px;
   background-color: white;
+  position: fixed;
+  top: 50px;
+  z-index: 20;
 }
 #lightbox .lightbox {
   display: flex;

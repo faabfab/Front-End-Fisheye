@@ -1,12 +1,12 @@
 function popularityFilter(mediaCards) {
     let tab = []
     mediaCards.forEach(mediaCard => {
-    let mediaLike = mediaCard.querySelector('.likes_number')
-    let dataElement = new Object()
-    dataElement.likes = mediaLike.textContent
-    dataElement.element = mediaCard
-    tab.push(dataElement)
-    });
+        let mediaLike = mediaCard.querySelector('.likes_number')
+        let dataElement = new Object()
+        dataElement.likes = mediaLike.textContent
+        dataElement.element = mediaCard
+        tab.push(dataElement)
+        });
     tab.sort(function(a,b){
         return a.likes - b.likes
     })
@@ -64,10 +64,13 @@ function mediasDatasReturn(filterName) {
 
     switch (filterName) {
         case 'Popularité':
+            //console.log(popularityFilter(mediasCards))
             return popularityFilter(mediasCards)
         case 'Date':
+            //console.log(dateFilter(mediasCards))
             return dateFilter(mediasCards)
         case 'Titre':
+            //console.log(titleFilter(mediasCards))
             return titleFilter(mediasCards)
         default:
             break;

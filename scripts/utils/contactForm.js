@@ -1,4 +1,4 @@
-// TODO: Fiare tous les tests et envoyer
+// FIXME: CONTACT :Faire tous les tests et envoyer
 const first = document.querySelector('#first')
 const last = document.querySelector('#last')
 const email = document.querySelector('#email')
@@ -85,11 +85,14 @@ function submit() {
         && isLast()
         && isEmail()
         && isMessage()
-        ) {        
-        console.log('Message de : '+first.value+' '+last.value)
-        console.log('email : '+email.value)
-        console.log(message.value)
-        return true
+        ) {
+            let messageTable = [
+                ["Message de : ",first.value+' '+last.value],
+                ["Email : ",email.value],
+                ["Message : ",message.value]
+            ]
+            console.table(messageTable)
+            return true
     } else{
         console.log('Message incomplet')
         return false
