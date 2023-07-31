@@ -3,7 +3,7 @@
 // =============================================================================
 
 
-import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect } from "../utils/utilsModules.js"
+import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect, mediasTabindex } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
 import { displayInLightbox, lightboxButtonsInit, lightboxElementIndex,lightboxElementByElement } from "../utils/lightbox.js"
 import { submit, isFirst, isLast, isEmail, isMessage } from "../utils/contactForm.js"
@@ -72,6 +72,8 @@ async function displayDataMedias(id, element) {
                 lightboxContentOld.remove()
             }
             filterSelect(filtersItems,filterItem,filtersExpand)
+            // Tabindex
+            mediasTabindex()
             // on change le tableau de la lightbox
             let articlesMedias = document.querySelectorAll('article')
             let tabData = Object.values(articlesMedias) //conversion object en tab
@@ -80,11 +82,9 @@ async function displayDataMedias(id, element) {
         })
     });
 
-
-
     // Lightbox events
 
-    // TODO: FAIRE LE TRAITEMENT DES VIDEOS
+    // FIXME: FAIRE LE TRAITEMENT DES VIDEOS
 
     const closeLightboxButton = document.querySelector('.lightbox_content_close_button')
     closeLightboxButton.addEventListener('click', ()=>{
@@ -122,13 +122,15 @@ async function displayDataMedias(id, element) {
     nextBtn.addEventListener('click',()=>{
         let lightboxEl = document.querySelector('.lightbox_content')
         let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
-
         if (indexContent<(elementsArrayInitials.length-1)) {           
             displayInLightbox(elementsArrayInitials[indexContent+1],lightboxClass)
         } else {
             displayInLightbox(elementsArrayInitials[0],lightboxClass)
         }
     })
+
+    // Tabindex
+    mediasTabindex()
 
 }
 
@@ -172,7 +174,7 @@ async function init() {
         contactConfirmModal.close()
     })
 
-    // FORM EVENTS
+    // Form events
     const first = document.getElementById('first');
     first.addEventListener('focusout', function (e) {
         e.preventDefault()
@@ -196,6 +198,8 @@ async function init() {
         e.preventDefault()
         isMessage()
     })
+
+    
 }
 
 init()

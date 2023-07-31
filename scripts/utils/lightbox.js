@@ -5,39 +5,7 @@ function displayInLightbox(el,element) {
     element.appendChild(el)
 }
 
-function lightboxElements(tab,index) {
-    let title = tab[index].querySelector('h2')
-    let img = tab[index].querySelector('img')
-    let src = img.getAttribute('src')
-    // TODO: Tester si c'est une vidéo
-    let lightboxContent = document.createElement('div')
-    lightboxContent.setAttribute('class','lightbox_content')
-    let lightboxContentImg = document.createElement('div')
-    lightboxContentImg.setAttribute('class','lightbox_content_img')
-    let image
-    if (tab[index].querySelector('.is_video')) {
-        console.log("c'est une vidéo")
-        image = document.createElement('video')
-        image.setAttribute('controls','')
-        image.setAttribute('width','90%')
-        let source = document.createElement('source')
-        source.setAttribute('type','video/mp4')
-        src = src.replace('.jpg','.mp4')
-        source.setAttribute('src', src)
-        image.appendChild(source)
-    } else {
-        console.log("c'est pas une vidéo")
-        image = document.createElement('img')
-        image.setAttribute('src', src)
-    }
-    let h1 = document.createElement('h1')
-    h1.textContent = title.textContent
-    lightboxContentImg.appendChild(image)
-    lightboxContent.appendChild(lightboxContentImg)
-    lightboxContent.appendChild(h1)
-
-    return lightboxContent
-}
+// FIXME: lightboxElements(tab,index) et lightboxElementByElement(element) FAIRE UNE SEULE FONCTION
 
 function lightboxElementByElement(element) {
     let title = element.parentElement.querySelector('h2')
@@ -49,7 +17,7 @@ function lightboxElementByElement(element) {
     lightboxContentImg.setAttribute('class','lightbox_content_img')
     let image
     if (element.querySelector('.is_video')) {
-        console.log("c'est une vidéo")
+        //console.log("c'est une vidéo")
         image = document.createElement('video')
         image.setAttribute('controls','')
         image.setAttribute('width','90%')
@@ -59,7 +27,7 @@ function lightboxElementByElement(element) {
         source.setAttribute('src', src)
         image.appendChild(source)
     } else {
-        console.log("c'est pas une vidéo")
+        //console.log("c'est pas une vidéo")
         image = document.createElement('img')
         image.setAttribute('src', src)
     }
@@ -92,7 +60,8 @@ function lightboxButtonsInit() {
     let elementsArrayInitials = [] //tableau des éléments de la lightbox
 
     lightboxButtons.forEach(element => {
-        elementsArrayInitials.push(lightboxElements(tabData,tabData.indexOf(element.parentElement)))
+        let lightboxElement = lightboxElementByElement(element)
+        elementsArrayInitials.push(lightboxElement)
     });
     return elementsArrayInitials
 }

@@ -10,16 +10,16 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 90px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 h1 {
   color: #901C1C;
-  margin-right: 100px;
 }
 
 .logo {
   height: 50px;
-  margin-left: 100px;
 }
 
 .photographer_section {
@@ -45,6 +45,10 @@ h1 {
 .photographer_section article img {
   height: 200px;
   width: 200px;
+}
+
+a:focus, h1:focus, p:focus, div:focus, button:focus, picture:focus, ul:focus, h2:focus, span:focus {
+  outline: 3px solid #95FFF9;
 }
 
 .photographer_section article a {

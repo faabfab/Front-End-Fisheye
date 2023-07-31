@@ -30,6 +30,18 @@ async function init() {
     const { photographers } = await getPhotographers();
     // affichage des photographes
     displayData(photographers);
+
+    // Tabindex
+    let i = 3
+    let articles = document.querySelectorAll('article')
+    articles.forEach(article => {
+        article.querySelector('a').setAttribute('tabindex',i)
+        i = i++
+        article.querySelector('p').setAttribute('tabindex',i)
+        i = i++
+    });
+
+
 }
 
 init();

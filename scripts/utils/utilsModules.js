@@ -144,6 +144,20 @@ function filterSelect(listItems, item, arrowElement) {
     arrowElement.setAttribute('data-state','close')
 }
 
+function mediasTabindex() {
+    let i = 9
+    let articles = document.querySelectorAll('article')
+    articles.forEach(article => {
+        //console.log(i)
+        article.querySelector('picture').setAttribute('tabindex',i)
+        i=i+1
+        article.querySelector('h2').setAttribute('tabindex',i)
+        i=i+1
+        article.querySelector('span').setAttribute('tabindex',i)
+        i=i+1
+    });
+}
+
 export {
     filtersManage,
     getPhotographers,
@@ -152,5 +166,6 @@ export {
     getMedias,
     getMediasByID,likesIncrement,
     totalLikesIncrement,
-    filterSelect
+    filterSelect,
+    mediasTabindex
 }

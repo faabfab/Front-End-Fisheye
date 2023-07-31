@@ -10,16 +10,16 @@
   </head>
   <body>
     <header>
-      <a href="/">
-        <img src="assets/images/logo.png" class="logo" />
+      <a href="/" tabindex="1">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
       </a>
     </header>
     <main id="main">
       <section id="photographer_infos"></section>
       <div class="filters">
-        <p class="filters_display">Trier par</p>
+        <p class="filters_display" tabindex="7">Trier par</p>
         <p class="list_arrow" data-state="close"><i class="fa-solid fa-chevron-down"></i></p>
-        <ul id="filters_list">
+        <ul id="filters_list" tabindex="8">
           <li id="filter_item" data-select="true" class="no_border">Popularité</li>
           <li id="filter_item" class="invisible" data-select="false">Date</li>
           <li id="filter_item" class="invisible" data-select="false">Titre</li>
@@ -28,7 +28,7 @@
     </main>
     <div id="price_likes">
       <p>
-        <span id="photographer_likes"></span>
+        <span id="photographer_likes" tabindex="6"></span>
         <button class="all_like_button">
           <i class="fa-solid fa-heart"></i>
         </button>

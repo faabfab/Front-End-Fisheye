@@ -12,22 +12,30 @@ function photographerInfosSection(data) {
     const infosText = document.createElement('div')
     infosText.setAttribute('class','photograph-infos')
     const h1 = document.createElement('h1')
+    h1.setAttribute('tabindex','2')
     h1.textContent = name
+    const div = document.createElement('div')
+    div.setAttribute('tabindex','3')
     const h2 = document.createElement('h2')
     h2.textContent = city +', '+ country
     const p = document.createElement('p')
     p.textContent = tagline
     
+    div.appendChild(h2)
+    div.appendChild(p)
     infosText.appendChild(h1)
-    infosText.appendChild(h2)
-    infosText.appendChild(p)
+    //infosText.appendChild(h2)
+    //infosText.appendChild(p)
+    infosText.appendChild(div)
 
     const button = document.createElement('button')
     button.setAttribute('class','contact_button')
+    button.setAttribute('tabindex','4')
     button.textContent = 'Contactez-moi'
 
     const picture = document.createElement('picture')
     picture.setAttribute('class','imgLayer')
+    picture.setAttribute('tabindex','5')
     const img = document.createElement('img')
     img.setAttribute('src',image)
     picture.appendChild(img)
