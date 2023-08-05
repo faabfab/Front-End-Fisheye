@@ -86,8 +86,32 @@ function totalLikesIncrement(bool) {
 }
 
 // HACK: Conversion en class filterManage en constructor
-function filtersManage () {
-    let state = this.getAttribute('data-state')
+function filtersManage (filtersExpand,filtersItems) {
+    let state = filtersExpand.getAttribute('data-state')
+    //const filterItem = document.querySelectorAll('#filter_item')
+    switch (state) {
+        case 'close':
+            filtersItems.forEach(filter => {
+                filter.removeAttribute('class')
+            });        
+            filtersExpand.innerHTML = '<i class="fa-solid fa-chevron-up">'
+            filtersExpand.setAttribute('data-state','open')
+            break;
+        case 'open' :
+            filtersItems.forEach(filter => {
+                if (filter.getAttribute('data-select') == 'false') {
+                    filter.setAttribute('class','invisible')
+                } else{
+                    filter.setAttribute('class','no_border')
+                }
+            });
+            filtersExpand.innerHTML = '<i class="fa-solid fa-chevron-down">'
+            filtersExpand.setAttribute('data-state','close')
+            break
+        default:
+            break;
+    }
+    /*let state = this.getAttribute('data-state')
     const filterItem = document.querySelectorAll('#filter_item')
     switch (state) {
         case 'close':
@@ -110,7 +134,7 @@ function filtersManage () {
             break
         default:
             break;
-    }
+    }*/
 }
 
 function filterSelect(listItems, item, arrowElement) {
@@ -145,7 +169,7 @@ function filterSelect(listItems, item, arrowElement) {
 }
 
 function mediasTabindex() {
-    let i = 9
+    let i = 12
     let articles = document.querySelectorAll('article')
     articles.forEach(article => {
         //console.log(i)
@@ -154,6 +178,8 @@ function mediasTabindex() {
         article.querySelector('h2').setAttribute('tabindex',i)
         i=i+1
         article.querySelector('span').setAttribute('tabindex',i)
+        i=i+1
+        article.querySelector('button').setAttribute('tabindex',i)
         i=i+1
     });
 }

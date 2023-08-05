@@ -24,18 +24,18 @@ function photographerInfosSection(data) {
     div.appendChild(h2)
     div.appendChild(p)
     infosText.appendChild(h1)
-    //infosText.appendChild(h2)
-    //infosText.appendChild(p)
     infosText.appendChild(div)
 
     const button = document.createElement('button')
     button.setAttribute('class','contact_button')
     button.setAttribute('tabindex','4')
+    button.setAttribute('aria-label','Contact Me')
     button.textContent = 'Contactez-moi'
 
     const picture = document.createElement('picture')
     picture.setAttribute('class','imgLayer')
     picture.setAttribute('tabindex','5')
+    picture.setAttribute('aria-label',name)
     const img = document.createElement('img')
     img.setAttribute('src',image)
     picture.appendChild(img)
@@ -69,8 +69,11 @@ function mediasTemplate (data,phId) {
         article.setAttribute('class', 'media')
         const picture = document.createElement('picture')
         picture.setAttribute('id','lightbox_button')
+        picture.setAttribute('role','button')
+        picture.setAttribute('aria-label',title)
         const img = document.createElement('img')
         img.setAttribute('src', pict)
+        img.setAttribute('alt',title)
         picture.appendChild(img)
         if (video) {
             const video = document.createElement('div')

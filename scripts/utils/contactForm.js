@@ -1,4 +1,4 @@
-// FIXME: CONTACT :Faire tous les tests et envoyer
+
 const first = document.querySelector('#first')
 const last = document.querySelector('#last')
 const email = document.querySelector('#email')

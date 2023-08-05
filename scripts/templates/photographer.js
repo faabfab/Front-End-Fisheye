@@ -14,6 +14,7 @@ function photographerTemplate(data) {
         const article = document.createElement( 'article' );
         const a = document.createElement('a')
         a.setAttribute('href','photographer.html?id='+id)
+        a.setAttribute('aria-label', name)
         //a.setAttribute('tabindex','3')
         const pict = document.createElement('picture')
         pict.setAttribute('class', 'imgLayer')

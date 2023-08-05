@@ -18,17 +18,17 @@
       <section id="photographer_infos"></section>
       <div class="filters">
         <p class="filters_display" tabindex="7">Trier par</p>
-        <p class="list_arrow" data-state="close"><i class="fa-solid fa-chevron-down"></i></p>
-        <ul id="filters_list" tabindex="8">
-          <li id="filter_item" data-select="true" class="no_border">Popularité</li>
-          <li id="filter_item" class="invisible" data-select="false">Date</li>
-          <li id="filter_item" class="invisible" data-select="false">Titre</li>
+        <p class="list_arrow" tabindex="8" data-state="close"><i class="fa-solid fa-chevron-down"></i></p>
+        <ul id="filters_list" data-state="close" role="listbox" aria-labelledby="Order by" aria-multiselectable="true" aria-activedescendant="filter_item" aria-selected="true">
+          <li id="filter_item" data-select="true" class="no_border" tabindex="9" role="button" aria-label="Popularité" aria-haspopup="listbox" aria-expanded="true">Popularité</li>
+          <li id="filter_item" class="invisible" data-select="false" tabindex="10" role="button" aria-label="Date" aria-haspopup="listbox" aria-expanded="true">Date</li>
+          <li id="filter_item" class="invisible" data-select="false" tabindex="11" role="button" aria-label="Titre" aria-haspopup="listbox" aria-expanded="true">Titre</li>
         </ul>
       </div>
     </main>
-    <div id="price_likes">
+    <div id="price_likes" tabindex="6" role="text">
       <p>
-        <span id="photographer_likes" tabindex="6"></span>
+        <span id="photographer_likes"></span>
         <button class="all_like_button">
           <i class="fa-solid fa-heart"></i>
         </button>
@@ -37,9 +37,10 @@
     </div>
     <div id="lightbox" class="invisible">
       <div class="lightbox">
-        <div class="left"><i class="fa-solid fa-chevron-left"></i></div>
-        <div class="right"><i class="fa-solid fa-chevron-right"></i></div>
-        <div class="lightbox_content_close_button"><i class="fa-sharp fa-solid fa-xmark"></i></div>
+        <!-- TODO: Comment mettre les tabindex sur sur >, < et X -->
+        <div class="left" tabindex="3" role="button" aria-label="left button" tabindex="2"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="right" tabindex="2" role="button" aria-label="right button" tabindex="1"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="lightbox_content_close_button" role="button" aria-label="close button" tabindex="3"><i class="fa-sharp fa-solid fa-xmark"></i></div>
       </div>
     </div>
     <dialog id="contact_modal">
@@ -48,7 +49,6 @@
           <h2>Contactez-moi <br><span id="photograph_name"></span></h2>
           <img src="assets/icons/close.svg" class="closeButton"/>
         </header>
-        <!-- FIXME: Que mettre dans la form  -->
         <form id="contactForm" name="contact">
           <div class="formData" id="firstData">
 						<label for="first">Prénom</label>

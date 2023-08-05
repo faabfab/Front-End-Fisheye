@@ -5,7 +5,7 @@
 
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect, mediasTabindex } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
-import { displayInLightbox, lightboxButtonsInit, lightboxElementIndex,lightboxElementByElement } from "../utils/lightbox.js"
+import { displayInLightbox, lightboxButtonsInit, lightboxElementIndex, nextElement, openLightbox, previousElement } from "../utils/lightbox.js"
 import { submit, isFirst, isLast, isEmail, isMessage } from "../utils/contactForm.js"
 
 const main = document.querySelector('main')
@@ -59,10 +59,23 @@ async function displayDataMedias(id, element) {
 
     // Filters
     const filtersExpand = document.querySelector('.list_arrow')
-    filtersExpand.addEventListener('click', filtersManage)
-    
+    const filterList = document.querySelector('#filters_list')
     const filtersItems = document.querySelectorAll('#filter_item')
-
+    //filtersExpand.addEventListener('click', filtersManage)
+    filtersExpand.addEventListener('click', (e)=>{
+        e.preventDefault()
+        filtersManage(filtersExpand,filtersItems)
+    })
+    
+    // Accessibilité
+    filtersExpand.addEventListener('keyup',(e)=>{
+        e.preventDefault()
+        //console.log(e.key)
+        if (e.key==='Tab') {
+            filtersManage (filtersExpand,filtersItems)
+        }
+    })
+    
     filtersItems.forEach(filterItem => {
         filterItem.addEventListener('click',(e)=>{
             e.preventDefault()
@@ -80,11 +93,30 @@ async function displayDataMedias(id, element) {
             elementsArrayInitials = []
             elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
         })
+        // Accessibilité
+        // FIXME: Si liste ouverte alors navigation avec Tab et Enter
+        // TODO: Faire une seule fonction
+        filterItem.addEventListener('keyup',(e)=>{
+            e.preventDefault()
+            if (e.key=='Enter') {
+                //remove old element
+                let lightboxContentOld = document.querySelector('.lightbox_content')
+                if (lightboxContentOld) {
+                    lightboxContentOld.remove()
+                }
+                filterSelect(filtersItems,filterItem,filtersExpand)
+                // Tabindex
+                mediasTabindex()
+                // on change le tableau de la lightbox
+                let articlesMedias = document.querySelectorAll('article')
+                let tabData = Object.values(articlesMedias) //conversion object en tab
+                elementsArrayInitials = []
+                elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
+            }
+        })
     });
 
     // Lightbox events
-
-    // FIXME: FAIRE LE TRAITEMENT DES VIDEOS
 
     const closeLightboxButton = document.querySelector('.lightbox_content_close_button')
     closeLightboxButton.addEventListener('click', ()=>{
@@ -99,36 +131,48 @@ async function displayDataMedias(id, element) {
     const lightboxButtons = document.querySelectorAll('#lightbox_button')
     lightboxButtons.forEach(lightboxButton => {
         lightboxButton.addEventListener('click', ()=>{
-            let lightboxContentOld = document.querySelector('.lightbox_content')
-            if (lightboxContentOld) {
-                lightboxContentOld.remove()
-            }
-            let el = lightboxElementByElement(lightboxButton)
-            displayInLightbox(el,lightboxClass)
-            lightbox.removeAttribute('class')
+            openLightbox(lightboxButton,lightbox,lightboxClass)
         })
+
+        // Accessibilité
+        lightboxButton.addEventListener('keyup',(e)=>{
+            if (e.key == 'Enter') {
+                openLightbox(lightboxButton,lightbox,lightboxClass)
+            }
+        })
+
     });
 
-    previousBtn.addEventListener('click',()=>{
-        let lightboxEl = document.querySelector('.lightbox_content')
-        let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
-        if (indexContent>0) {            
-            displayInLightbox(elementsArrayInitials[indexContent-1],lightboxClass)
-        } else {
-            displayInLightbox(elementsArrayInitials[elementsArrayInitials.length-1],lightboxClass)
-        }
+
+    previousBtn.addEventListener('click',(e)=>{
+        previousElement(elementsArrayInitials,lightboxClass)
     })
 
     nextBtn.addEventListener('click',()=>{
-        let lightboxEl = document.querySelector('.lightbox_content')
-        let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
-        if (indexContent<(elementsArrayInitials.length-1)) {           
-            displayInLightbox(elementsArrayInitials[indexContent+1],lightboxClass)
-        } else {
-            displayInLightbox(elementsArrayInitials[0],lightboxClass)
-        }
+        nextElement(elementsArrayInitials,lightboxClass)
     })
 
+
+    document.addEventListener('keyup',(e)=>{
+        // on lightbox
+        if (lightbox.getAttribute('class')!='invisible') {
+            if (e.key=='ArrowLeft') { //Previous
+                previousElement(elementsArrayInitials,lightboxClass)
+            }
+            if (e.key=='ArrowRight') { //Next
+                nextElement(elementsArrayInitials,lightboxClass)
+            }
+            if (e.key=='x') {
+                let lightboxContentOld = document.querySelector('.lightbox_content')
+                lightboxContentOld.remove()
+                lightbox.setAttribute('class','invisible')
+            }
+        }
+
+        // on contact modal
+
+    })
+ 
     // Tabindex
     mediasTabindex()
 
@@ -160,7 +204,7 @@ async function init() {
     closeButton.addEventListener('click' , ()=>{
         contactModal.close()
     })
-
+    
     const contactConfirmModal = document.querySelector('#contact_modal_confirm')
     const submitButton = document.querySelector('#submit_button')
     submitButton.addEventListener('click',()=>{
@@ -172,6 +216,20 @@ async function init() {
     const closeConfirmButton = document.querySelector('#close_confirm_button')
     closeConfirmButton.addEventListener('click',()=>{
         contactConfirmModal.close()
+    })
+    
+    // Accessibilité
+    document.addEventListener('keyup',(e)=>{
+        if (contactModal.getAttributeNames('open')[1]=='open') {
+            if (e.key=='x') {
+                contactModal.close()
+            }
+        }
+        if (contactConfirmModal.getAttributeNames('open')[1]=='open') {
+            if (e.key=='x') {
+                contactConfirmModal.close()
+            }
+        }
     })
 
     // Form events

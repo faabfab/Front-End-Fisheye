@@ -50,7 +50,18 @@ h1 {
     width: 200px;
 }
 
-a:focus , h1:focus, p:focus, div:focus, button:focus, picture:focus, ul:focus, h2:focus, span:focus{ 
+a:focus,
+h1:focus,
+p:focus,
+div:focus,
+button:focus,
+picture:focus,
+ul:focus,
+h2:focus,
+span:focus,
+li:focus,
+input:focus,
+textarea:focus{ 
     outline: 3px solid #95FFF9
 }
 

@@ -1,11 +1,8 @@
 
-// FIXME: Fonction d'affichage d'un élément du tableau avec les flèches
 
 function displayInLightbox(el,element) {
     element.appendChild(el)
 }
-
-// FIXME: lightboxElements(tab,index) et lightboxElementByElement(element) FAIRE UNE SEULE FONCTION
 
 function lightboxElementByElement(element) {
     let title = element.parentElement.querySelector('h2')
@@ -42,14 +39,13 @@ function lightboxElementByElement(element) {
 
 function lightboxElementIndex(lightboxEl,elementsArrayInitials) {
     let h1 = lightboxEl.querySelector('h1')
-        let indexContent = -1
-        for (let index = 0; index < elementsArrayInitials.length; index++) {
-            let h1tab = elementsArrayInitials[index].querySelector('h1');
-            if (h1tab.textContent== h1.textContent) {
-                lightboxEl.remove()
-                return index
-            }
+    for (let index = 0; index < elementsArrayInitials.length; index++) {
+        let h1tab = elementsArrayInitials[index].querySelector('h1');
+        if (h1tab.textContent== h1.textContent) {
+            lightboxEl.remove()
+            return index
         }
+    }
 }
 
 function lightboxButtonsInit() {
@@ -66,9 +62,42 @@ function lightboxButtonsInit() {
     return elementsArrayInitials
 }
 
+function openLightbox(lightboxButton,lightbox,lightboxClass) {
+    let lightboxContentOld = document.querySelector('.lightbox_content')
+    if (lightboxContentOld) {
+        lightboxContentOld.remove()
+    }
+    let el = lightboxElementByElement(lightboxButton)
+    displayInLightbox(el,lightboxClass)
+    lightbox.removeAttribute('class')
+}
+
+function previousElement(elementsArrayInitials,lightboxClass) {
+    let lightboxEl = document.querySelector('.lightbox_content')
+    let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
+    if (indexContent>0) {            
+        displayInLightbox(elementsArrayInitials[indexContent-1],lightboxClass)
+    } else {
+        displayInLightbox(elementsArrayInitials[elementsArrayInitials.length-1],lightboxClass)
+    }
+}
+
+function nextElement(elementsArrayInitials,lightboxClass) {
+    let lightboxEl = document.querySelector('.lightbox_content')
+    let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
+    if (indexContent<(elementsArrayInitials.length-1)) {           
+        displayInLightbox(elementsArrayInitials[indexContent+1],lightboxClass)
+    } else {
+        displayInLightbox(elementsArrayInitials[0],lightboxClass)
+    }
+}
+
 export{
     displayInLightbox,
     lightboxButtonsInit,
     lightboxElementIndex,
-    lightboxElementByElement
+    lightboxElementByElement,
+    openLightbox,
+    previousElement,
+    nextElement
 }
