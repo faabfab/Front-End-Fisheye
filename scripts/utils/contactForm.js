@@ -1,4 +1,4 @@
-
+// TODO: Tester les aria et role pour les messages d'erreurs 
 const first = document.querySelector('#first')
 const last = document.querySelector('#last')
 const email = document.querySelector('#email')

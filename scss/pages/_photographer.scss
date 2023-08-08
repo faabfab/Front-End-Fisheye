@@ -249,7 +249,12 @@ dialog{
                 cursor: default;
             }
             & label{
-                @extend h1
+                @extend h1;
+                margin-top:-55px;
+            }
+            & input[type="reset"]{
+                color: white;
+                background-color: white;
             }
             &_close_button{
                 position: absolute;

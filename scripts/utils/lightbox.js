@@ -1,39 +1,25 @@
-
-
 function displayInLightbox(el,element) {
-    element.appendChild(el)
+    element.prepend(el)
 }
 
+// TODO: Tester les aria et role pour l'accessibilité
 function lightboxElementByElement(element) {
     let title = element.parentElement.querySelector('h2')
     let img = element.parentElement.querySelector('img')
     let src = img.getAttribute('src')
 
-    /*let lightboxContent = document.createElement('object')
-    lightboxContent.setAttribute('class','lightbox_content')
-    //lightboxContent.setAttribute('tabindex','-1')
-    lightboxContent.setAttribute('aria-label',title.textContent)
-    let lightboxContentImg = document.createElement('div')
-    lightboxContentImg.setAttribute('class','lightbox_content_img')
-    //lightboxContentImg.setAttribute('role','img')
-    lightboxContentImg.setAttribute('aria-label',title.textContent)
-    //lightboxContentImg.setAttribute('tabindex','5')*/
-
     // FORM
     let lightboxContent = document.createElement('form')
     lightboxContent.setAttribute('class','lightbox_content')
-    lightboxContent.setAttribute('action','')
     lightboxContent.setAttribute('aria-label',title.textContent)
-
-
 
     let image
 
     if (element.querySelector('.is_video')) {
-        //console.log("c'est une vidéo")
         image = document.createElement('video')
         image.setAttribute('controls','')
-        image.setAttribute('width','90%')
+        image.setAttribute('width','100%')
+        image.setAttribute('height','85%')
         let source = document.createElement('source')
         source.setAttribute('type','video/mp4')
         src = src.replace('.jpg','.mp4')
@@ -44,42 +30,40 @@ function lightboxElementByElement(element) {
         track.setAttribute('kind','subtitles')
         image.appendChild(track)
     } else {
-        //console.log("c'est pas une vidéo")
-        //image = document.createElement('img')
-        //image.setAttribute('src', src)
-        //image.setAttribute('alt',title.textContent)
         image = document.createElement('input')
         image.setAttribute('type', 'image')
         image.setAttribute('src', src)
         image.setAttribute('alt',title.textContent)
         image.setAttribute('id','input_image')
         image.setAttribute('name','image')
-        
+        image.setAttribute('role','img')
+        image.setAttribute('value',' ')
     }
     image.setAttribute('aria-label',title.textContent)
-    //let h1 = document.createElement('h1')
-    //h1.setAttribute('role','text')
-    //h1.setAttribute('tabindex','6')
-    let h1 = document.createElement('label')
-    h1.setAttribute('for','image')
-    h1.textContent = title.textContent
-    //lightboxContentImg.appendChild(image)
-    //lightboxContent.appendChild(lightboxContentImg)
+    // FIXME: Faire un label pour l'imput et le mettre par dessus
+    let label = document.createElement('label')
+    label.setAttribute('for','input_title')
+    label.setAttribute('id','label_title')
+    label.textContent = title.textContent
+    let h1 = document.createElement('input')
+    h1.setAttribute('type','reset')
+    h1.setAttribute('role','text')
+    h1.setAttribute('id','input_title')    
+    h1.setAttribute('name','input_title')    
+    h1.setAttribute('value','')
     lightboxContent.appendChild(image)
 
     lightboxContent.appendChild(h1)
+    lightboxContent.appendChild(label)
 
     return lightboxContent
 }
 
 function lightboxElementIndex(lightboxEl,elementsArrayInitials) {
-    //let h1 = lightboxEl.querySelector('h1')
-    let h1 = lightboxEl.querySelector('label')
-    console.log(h1.textContent)
+    let h1 = lightboxEl.querySelector('#label_title')
     for (let index = 0; index < elementsArrayInitials.length; index++) {
-        //let h1tab = elementsArrayInitials[index].querySelector('h1');
-        let h1tab = elementsArrayInitials[index].querySelector('label');
-        if (h1tab.textContent== h1.textContent) {
+        let h1tab = elementsArrayInitials[index].querySelector('#label_title');
+        if (h1tab.textContent == h1.textContent) {
             lightboxEl.remove()
             return index
         }
@@ -87,7 +71,7 @@ function lightboxElementIndex(lightboxEl,elementsArrayInitials) {
 }
 
 function lightboxButtonsInit() {
-        // Lightbox table init
+    // Lightbox table init
     let articlesMedias = document.querySelectorAll('article')
     let tabData = Object.values(articlesMedias) //conversion object en tab
     let lightboxButtons = document.querySelectorAll('#lightbox_button')
@@ -106,7 +90,6 @@ function openLightbox(lightboxButton,lightbox,lightboxClass,elementsArrayInitial
         lightboxContentOld.remove()
     }
     let el = lightboxElementByElement(lightboxButton)
-    //tabindexLightbox (elementsArrayInitials,el)
     displayInLightbox(el,lightboxClass)
     lightbox.removeAttribute('class')
 }
@@ -139,9 +122,17 @@ function tabindexLightbox(tab,el) {
     console.log(img)
     img.setAttribute('tabindex',firstIndex)
     h1.setAttribute('tabindex',firstIndex+1)
+}
 
-    console.log(firstIndex)
-    //return firstIndex
+// FIXME: Enlever le comportement de la FORM
+function inactiveLightboxForm() {
+    let inputImage = document.querySelector('#input_image')
+    if (inputImage) {
+        inputImage.addEventListener('click',(e)=>{
+            e.preventDefault()
+        })
+    }
+    //inputImage.focus()
 }
 
 export{
@@ -152,5 +143,6 @@ export{
     openLightbox,
     previousElement,
     nextElement,
-    tabindexLightbox
+    tabindexLightbox,
+    inactiveLightboxForm
 }

@@ -365,6 +365,13 @@ dialog form textarea, dialog form input {
   height: 85vh;
   cursor: default;
 }
+#lightbox .lightbox_content label {
+  margin-top: -55px;
+}
+#lightbox .lightbox_content input[type=reset] {
+  color: white;
+  background-color: white;
+}
 #lightbox .lightbox_content_close_button {
   position: absolute;
   top: 20px;

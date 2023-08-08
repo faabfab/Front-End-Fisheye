@@ -5,7 +5,7 @@
 
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect, mediasTabindex } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
-import { displayInLightbox, lightboxButtonsInit, lightboxElementIndex, nextElement, openLightbox, previousElement, tabindexLightbox } from "../utils/lightbox.js"
+import { displayInLightbox, inactiveLightboxForm, lightboxButtonsInit, lightboxElementIndex, nextElement, openLightbox, previousElement, tabindexLightbox } from "../utils/lightbox.js"
 import { submit, isFirst, isLast, isEmail, isMessage } from "../utils/contactForm.js"
 
 const main = document.querySelector('main')
@@ -61,7 +61,6 @@ async function displayDataMedias(id, element) {
     const filtersExpand = document.querySelector('.list_arrow')
     const filterList = document.querySelector('#filters_list')
     const filtersItems = document.querySelectorAll('#filter_item')
-    //filtersExpand.addEventListener('click', filtersManage)
     filtersExpand.addEventListener('click', (e)=>{
         e.preventDefault()
         filtersManage(filtersExpand,filtersItems)
@@ -70,7 +69,6 @@ async function displayDataMedias(id, element) {
     // Accessibilité
     filtersExpand.addEventListener('keyup',(e)=>{
         e.preventDefault()
-        //console.log(e.key)
         if (e.key==='Tab') {
             filtersManage (filtersExpand,filtersItems)
         }
@@ -128,18 +126,14 @@ async function displayDataMedias(id, element) {
     
     const previousBtn = document.querySelector('.left')
     const nextBtn = document.querySelector('.right')
-    // TODO: Enlever le comportement de la FORM
-    const inputImage = document.querySelector('.lightbox_content')
+    
 
 
     const lightboxButtons = document.querySelectorAll('#lightbox_button')
     lightboxButtons.forEach(lightboxButton => {
         lightboxButton.addEventListener('click', ()=>{
             openLightbox(lightboxButton,lightbox,lightboxClass,elementsArrayInitials)
-            // TODO: Tabindex lightbox
-            let object = document.querySelector('object')
-            //object.focus()
-            //tabindexLightbox(elementsArrayInitials,lightboxButton)
+            inactiveLightboxForm()
         })
 
         // Accessibilité
@@ -147,42 +141,36 @@ async function displayDataMedias(id, element) {
             if (e.key == 'Enter') {
                 openLightbox(lightboxButton,lightbox,lightboxClass)
                 lightbox.focus()
-                //let object = document.querySelector('object')
-                //object.focus()
-
+                inactiveLightboxForm()
             }
         })
 
     });
 
 
-    previousBtn.addEventListener('click',(e)=>{
+    previousBtn.addEventListener('click',()=>{
         previousElement(elementsArrayInitials,lightboxClass)
-        //object.focus()
+        inactiveLightboxForm()
     })
 
     nextBtn.addEventListener('click',()=>{
         nextElement(elementsArrayInitials,lightboxClass)
+        inactiveLightboxForm()
     })
 
 
     document.addEventListener('keyup',(e)=>{
         // on lightbox
         if (lightbox.getAttribute('class')!='invisible') {
-    
-            // TODO: Simulation de tabindex avec focus()
-            
             if (e.key=='ArrowLeft') { //Previous
                 previousBtn.focus()
                 previousElement(elementsArrayInitials,lightboxClass)
-                //let object = document.querySelector('object')
-                //object.focus()
+                inactiveLightboxForm()
             }
             if (e.key=='ArrowRight') { //Next
                 nextBtn.focus()
                 nextElement(elementsArrayInitials,lightboxClass)
-                //let object = document.querySelector('object')
-                //object.focus()
+                inactiveLightboxForm()
             }
             if (e.key=='Escape') {
                 closeLightboxButton.focus()

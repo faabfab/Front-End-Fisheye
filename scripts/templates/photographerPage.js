@@ -88,6 +88,8 @@ function mediasTemplate (data,phId) {
         const h3 = document.createElement('h3')
         const span = document.createElement('span')
         span.setAttribute('class','likes_number')
+        span.setAttribute('role','text')
+        span.setAttribute('aria-label',likes+' likes')
         span.textContent = likes
         h3.appendChild(span)
         const i = document.createElement('i')
