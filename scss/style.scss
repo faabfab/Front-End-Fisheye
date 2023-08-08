@@ -61,7 +61,10 @@ h2:focus,
 span:focus,
 li:focus,
 input:focus,
-textarea:focus{ 
+textarea:focus,
+video:focus,
+img:focus,
+object:focus{ 
     outline: 3px solid #95FFF9
 }
 

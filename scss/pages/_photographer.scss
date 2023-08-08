@@ -236,11 +236,20 @@ dialog{
                 align-items: center;
                 justify-content: center;
                 overflow: hidden;
-                & img{
+                & img, input[type="image"]{
                     object-fit: contain;
                     width: 100%;
-                    height: 100%;
+                    height: 100vh;
                 }
+            }
+            & input[type="image"]{
+                object-fit: contain;
+                width: 100%;
+                height: 85vh;
+                cursor: default;
+            }
+            & label{
+                @extend h1
             }
             &_close_button{
                 position: absolute;
@@ -254,12 +263,15 @@ dialog{
         color: #901C1C;
         font-size: 42px;
         cursor: pointer;
+        border: 0px;
+        background-color: transparent;
     }
     & .right{
         order: 3;
         padding-right: 20px;
     }
     & .left{
+        z-index: 2;
         order: 1;
         padding-left: 20px;
     }

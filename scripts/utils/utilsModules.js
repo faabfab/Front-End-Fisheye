@@ -85,7 +85,6 @@ function totalLikesIncrement(bool) {
     totalLikes.textContent = nbTotalLikes
 }
 
-// HACK: Conversion en class filterManage en constructor
 function filtersManage (filtersExpand,filtersItems) {
     let state = filtersExpand.getAttribute('data-state')
     //const filterItem = document.querySelectorAll('#filter_item')

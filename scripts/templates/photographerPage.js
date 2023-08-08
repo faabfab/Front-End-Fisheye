@@ -29,7 +29,7 @@ function photographerInfosSection(data) {
     const button = document.createElement('button')
     button.setAttribute('class','contact_button')
     button.setAttribute('tabindex','4')
-    button.setAttribute('aria-label','Contact Me')
+    button.setAttribute('aria-label','Contactez moi')
     button.textContent = 'Contactez-moi'
 
     const picture = document.createElement('picture')
@@ -93,6 +93,7 @@ function mediasTemplate (data,phId) {
         const i = document.createElement('i')
         i.setAttribute('class','fa-solid fa-heart')
         const btLike = document.createElement('button')
+        btLike.setAttribute('aria-label','bouton like')
         btLike.appendChild(i)
         btLike.setAttribute('class','like_button')
         h3.appendChild(btLike)

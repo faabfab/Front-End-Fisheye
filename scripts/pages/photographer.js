@@ -5,7 +5,7 @@
 
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect, mediasTabindex } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
-import { displayInLightbox, lightboxButtonsInit, lightboxElementIndex, nextElement, openLightbox, previousElement } from "../utils/lightbox.js"
+import { displayInLightbox, lightboxButtonsInit, lightboxElementIndex, nextElement, openLightbox, previousElement, tabindexLightbox } from "../utils/lightbox.js"
 import { submit, isFirst, isLast, isEmail, isMessage } from "../utils/contactForm.js"
 
 const main = document.querySelector('main')
@@ -124,20 +124,32 @@ async function displayDataMedias(id, element) {
         lightboxContentOld.remove()
         lightbox.setAttribute('class','invisible')
     })
- 
+    
+    
     const previousBtn = document.querySelector('.left')
     const nextBtn = document.querySelector('.right')
+    // TODO: Enlever le comportement de la FORM
+    const inputImage = document.querySelector('.lightbox_content')
+
 
     const lightboxButtons = document.querySelectorAll('#lightbox_button')
     lightboxButtons.forEach(lightboxButton => {
         lightboxButton.addEventListener('click', ()=>{
-            openLightbox(lightboxButton,lightbox,lightboxClass)
+            openLightbox(lightboxButton,lightbox,lightboxClass,elementsArrayInitials)
+            // TODO: Tabindex lightbox
+            let object = document.querySelector('object')
+            //object.focus()
+            //tabindexLightbox(elementsArrayInitials,lightboxButton)
         })
 
         // Accessibilité
         lightboxButton.addEventListener('keyup',(e)=>{
             if (e.key == 'Enter') {
                 openLightbox(lightboxButton,lightbox,lightboxClass)
+                lightbox.focus()
+                //let object = document.querySelector('object')
+                //object.focus()
+
             }
         })
 
@@ -146,6 +158,7 @@ async function displayDataMedias(id, element) {
 
     previousBtn.addEventListener('click',(e)=>{
         previousElement(elementsArrayInitials,lightboxClass)
+        //object.focus()
     })
 
     nextBtn.addEventListener('click',()=>{
@@ -156,20 +169,28 @@ async function displayDataMedias(id, element) {
     document.addEventListener('keyup',(e)=>{
         // on lightbox
         if (lightbox.getAttribute('class')!='invisible') {
+    
+            // TODO: Simulation de tabindex avec focus()
+            
             if (e.key=='ArrowLeft') { //Previous
+                previousBtn.focus()
                 previousElement(elementsArrayInitials,lightboxClass)
+                //let object = document.querySelector('object')
+                //object.focus()
             }
             if (e.key=='ArrowRight') { //Next
+                nextBtn.focus()
                 nextElement(elementsArrayInitials,lightboxClass)
+                //let object = document.querySelector('object')
+                //object.focus()
             }
-            if (e.key=='x') {
+            if (e.key=='Escape') {
+                closeLightboxButton.focus()
                 let lightboxContentOld = document.querySelector('.lightbox_content')
                 lightboxContentOld.remove()
                 lightbox.setAttribute('class','invisible')
             }
         }
-
-        // on contact modal
 
     })
  
@@ -221,12 +242,12 @@ async function init() {
     // Accessibilité
     document.addEventListener('keyup',(e)=>{
         if (contactModal.getAttributeNames('open')[1]=='open') {
-            if (e.key=='x') {
+            if (e.key=='Escape') {
                 contactModal.close()
             }
         }
         if (contactConfirmModal.getAttributeNames('open')[1]=='open') {
-            if (e.key=='x') {
+            if (e.key=='Escape') {
                 contactConfirmModal.close()
             }
         }
