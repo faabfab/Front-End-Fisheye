@@ -1,4 +1,6 @@
-// TODO: Tester les aria et role pour les messages d'erreurs 
+// FIXME: Comportement de base des arias
+// FIXME: Tester les aria et role pour les messages d'erreurs 
+// BUG: tab avec le lecteur d'écran quand input validé
 const first = document.querySelector('#first')
 const last = document.querySelector('#last')
 const email = document.querySelector('#email')
@@ -16,11 +18,18 @@ function isFirst() {
     const firstData = document.getElementById('firstData');
     if (isName(first.value)) {
         firstData.setAttribute("data-error-visible", false)
+        firstData.removeAttribute('tabindex')
+        firstData.removeAttribute('aria-label')
         firstData.setAttribute("data-error", "")
         return true
     }
     firstData.setAttribute("data-error-visible", true)
+    firstData.setAttribute("tabindex", "8")
+    firstData.setAttribute("role", "text")
+    firstData.setAttribute("aria-label", "Veuillez entrer 2 caractères ou plus pour le champ du nom.")
     firstData.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.")
+    firstData.focus()
+    return false
 }
 
 /**
@@ -32,10 +41,17 @@ function isLast() {
     if (isName(last.value)) {
         lastData.setAttribute("data-error-visible", false)
         lastData.setAttribute("data-error", "")
+        lastData.removeAttribute('tabindex')
+        lastData.removeAttribute('aria-label')
         return true
     }
     lastData.setAttribute("data-error-visible", true)
     lastData.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.")
+    lastData.setAttribute("tabindex", "11")
+    lastData.setAttribute("role", "text")
+    lastData.setAttribute("aria-label", "Veuillez entrer 2 caractères ou plus pour le champ du nom.")
+    lastData.focus()
+    return false
 }
 
 /**
@@ -47,10 +63,17 @@ function isEmail() {
     if (validEmail(email.value)) {
         emailData.setAttribute("data-error-visible", false)
         emailData.setAttribute("data-error", "")
+        emailData.removeAttribute('tabindex')
+        emailData.removeAttribute('aria-label')
         return true
     }
     emailData.setAttribute("data-error-visible", true)
     emailData.setAttribute("data-error", "Veuillez entrer un email valide.")
+    emailData.setAttribute("tabindex", "14")
+    emailData.setAttribute("role", "text")
+    emailData.setAttribute("aria-label", "Veuillez entrer un email valide.")
+    emailData.focus()
+    return false
 }
 
 /**
@@ -71,10 +94,16 @@ function isMessage() {
     if (message.value!='') {
         messageData.setAttribute("data-error-visible", false)
         messageData.setAttribute("data-error", "")
+        messageData.removeAttribute('tabindex')
+        messageData.removeAttribute('aria-label')
         return true
     } else{
         messageData.setAttribute("data-error-visible", true)
         messageData.setAttribute("data-error", "Veuillez entrer un message.")
+        messageData.setAttribute("tabindex", "17")
+        messageData.setAttribute("role", "text")
+        messageData.setAttribute("aria-label", "Veuillez entrer un message.")
+        messageData.focus()
         return false
     }
 }
@@ -97,7 +126,6 @@ function submit() {
         console.log('Message incomplet')
         return false
     }
-    
 }
 
 export{

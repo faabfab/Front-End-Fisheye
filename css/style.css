@@ -50,6 +50,7 @@ h1, #lightbox .lightbox_content label {
 a:focus,
 h1:focus,
 #lightbox .lightbox_content label:focus,
+h3:focus,
 p:focus,
 div:focus,
 button:focus,
@@ -62,7 +63,8 @@ input:focus,
 textarea:focus,
 video:focus,
 img:focus,
-object:focus {
+object:focus,
+label:focus {
   outline: 3px solid #95FFF9;
 }
 

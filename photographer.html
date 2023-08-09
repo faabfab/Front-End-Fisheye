@@ -41,38 +41,38 @@
       </div>
     </div>
     <dialog id="contact_modal">
-			<div class="modal">
+			<div class="modal" role="dialog" aria-labelledby="contact_title" tabindex="-1">
 				<header>
-          <h2 role="textbox" tabindex="-1">Contactez-moi <br><span id="photograph_name"></span></h2>
-          <img src="assets/icons/close.svg" class="closeButton" role="button"/>
+          <h2 role="textbox" id="contact_title" aria-roledescription="heading" tabindex="5">Contactez-moi <br><span id="photograph_name"></span></h2>
+          <img src="assets/icons/close.svg" class="closeButton" role="button" tabindex="19" aria-label="bouton fermer"/>
         </header>
         <form id="contactForm" name="contact">
           <div class="formData" id="firstData">
-						<label for="first">Prénom</label>
-						<input type="text" id="first" name="first">
+						<label for="first" role="label" tabindex="6" aria-label="Prénom">Prénom</label>
+						<input type="text" id="first" name="first" aria-label="Prénom" tabindex="7">
 					</div>
           <div class="formData" id="lastData">
-						<label for="last">Nom</label>
-						<input type="text" id="last" name="last">
+						<label for="last" role="label" tabindex="9" aria-label="Nom">Nom</label>
+						<input type="text" id="last" name="last" aria-label="Nom" tabindex="10">
 					</div>
           <div class="formData" id="emailData">
-						<label for="email">Email</label>
-						<input type="email" id="email" name="email">
+						<label for="email" role="label" tabindex="12" aria-label="Email">Email</label>
+						<input type="email" id="email" name="email" tabindex="13" aria-label="Email">
 					</div>
           <div class="formData" id="messageData">
-						<label for="message">Votre message</label>
-						<textarea id="message" name="message" type="text"></textarea>
+						<label for="message" role="label" tabindex="15" aria-label="Votre message">Votre message</label>
+						<textarea id="message" name="message" type="text" tabindex="16" aria-label="Votre message"></textarea>
 					</div>
 				</form>
         <!-- HACK: Button hors form -->
-        <button id="submit_button" class="contact_button" type="submit">Envoyer</button>
+        <button id="submit_button" class="contact_button" type="submit" role="button" aria-label="Envoyer" tabindex="18">Envoyer</button>
 			</div>
 		</dialog>
     <dialog id="contact_modal_confirm">
-      <div class="modal">
+      <div class="modal" role="dialog" tabindex="-1" aria-labelledby="contact_title">
         <header>
-          <h3 role="text">Votre message a été envoyé</h3>
-          <img id="close_confirm_button" src="assets/icons/close.svg" class="closeButton"/>
+          <h3 role="text" tabindex="2" id="contact_title">Votre message a été envoyé</h3>
+          <img id="close_confirm_button" src="assets/icons/close.svg" class="closeButton" tabindex="3" role="button" aria-label="bouton fermer"/>
         </header>
       </div>
     </dialog>

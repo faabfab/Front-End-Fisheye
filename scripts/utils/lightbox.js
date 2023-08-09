@@ -72,8 +72,6 @@ function lightboxElementIndex(lightboxEl,elementsArrayInitials) {
 
 function lightboxButtonsInit() {
     // Lightbox table init
-    let articlesMedias = document.querySelectorAll('article')
-    let tabData = Object.values(articlesMedias) //conversion object en tab
     let lightboxButtons = document.querySelectorAll('#lightbox_button')
     let elementsArrayInitials = [] //tableau des éléments de la lightbox
 
