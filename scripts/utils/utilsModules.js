@@ -110,30 +110,6 @@ function filtersManage (filtersExpand,filtersItems) {
         default:
             break;
     }
-    /*let state = this.getAttribute('data-state')
-    const filterItem = document.querySelectorAll('#filter_item')
-    switch (state) {
-        case 'close':
-            filterItem.forEach(filter => {
-                filter.removeAttribute('class')
-            });        
-            this.innerHTML = '<i class="fa-solid fa-chevron-up">'
-            this.setAttribute('data-state','open')
-            break;
-        case 'open' :
-            filterItem.forEach(filter => {
-                if (filter.getAttribute('data-select') == 'false') {
-                    filter.setAttribute('class','invisible')
-                } else{
-                    filter.setAttribute('class','no_border')
-                }
-            });
-            this.innerHTML = '<i class="fa-solid fa-chevron-down">'
-            this.setAttribute('data-state','close')
-            break
-        default:
-            break;
-    }*/
 }
 
 function filterSelect(listItems, item, arrowElement) {
@@ -171,7 +147,6 @@ function mediasTabindex() {
     let i = 12
     let articles = document.querySelectorAll('article')
     articles.forEach(article => {
-        //console.log(i)
         article.querySelector('picture').setAttribute('tabindex',i)
         i=i+1
         article.querySelector('h2').setAttribute('tabindex',i)

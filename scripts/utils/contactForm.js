@@ -1,5 +1,4 @@
-// FIXME: Comportement de base des arias
-// FIXME: Tester les aria et role pour les messages d'erreurs 
+
 // BUG: tab avec le lecteur d'écran quand input validé
 const first = document.querySelector('#first')
 const last = document.querySelector('#last')

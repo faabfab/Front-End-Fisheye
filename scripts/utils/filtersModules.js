@@ -64,13 +64,10 @@ function mediasDatasReturn(filterName) {
 
     switch (filterName) {
         case 'Popularité':
-            //console.log(popularityFilter(mediasCards))
             return popularityFilter(mediasCards)
         case 'Date':
-            //console.log(dateFilter(mediasCards))
             return dateFilter(mediasCards)
         case 'Titre':
-            //console.log(titleFilter(mediasCards))
             return titleFilter(mediasCards)
         default:
             break;

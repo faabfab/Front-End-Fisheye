@@ -18,8 +18,9 @@ function lightboxElementByElement(element) {
     if (element.querySelector('.is_video')) {
         image = document.createElement('video')
         image.setAttribute('controls','')
-        image.setAttribute('width','100%')
-        image.setAttribute('height','85%')
+        image.setAttribute('class','lightbox_video')
+        //image.setAttribute('width','100%')
+        //image.setAttribute('height','85%')
         let source = document.createElement('source')
         source.setAttribute('type','video/mp4')
         src = src.replace('.jpg','.mp4')
@@ -40,14 +41,14 @@ function lightboxElementByElement(element) {
         image.setAttribute('value',' ')
     }
     image.setAttribute('aria-label',title.textContent)
-    // FIXME: Faire un label pour l'imput et le mettre par dessus
     let label = document.createElement('label')
     label.setAttribute('for','input_title')
     label.setAttribute('id','label_title')
     label.textContent = title.textContent
     let h1 = document.createElement('input')
-    h1.setAttribute('type','reset')
+    h1.setAttribute('type','button')
     h1.setAttribute('role','text')
+    h1.setAttribute('id','input_title')    
     h1.setAttribute('id','input_title')    
     h1.setAttribute('name','input_title')    
     h1.setAttribute('value','')
@@ -122,7 +123,6 @@ function tabindexLightbox(tab,el) {
     h1.setAttribute('tabindex',firstIndex+1)
 }
 
-// FIXME: Enlever le comportement de la FORM
 function inactiveLightboxForm() {
     let inputImage = document.querySelector('#input_image')
     if (inputImage) {

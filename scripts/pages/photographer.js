@@ -5,7 +5,7 @@
 
 import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect, mediasTabindex } from "../utils/utilsModules.js"
 import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
-import { displayInLightbox, inactiveLightboxForm, lightboxButtonsInit, lightboxElementIndex, nextElement, openLightbox, previousElement, tabindexLightbox } from "../utils/lightbox.js"
+import { inactiveLightboxForm, lightboxButtonsInit, nextElement, openLightbox, previousElement } from "../utils/lightbox.js"
 import { submit, isFirst, isLast, isEmail, isMessage } from "../utils/contactForm.js"
 
 const main = document.querySelector('main')
@@ -59,7 +59,6 @@ async function displayDataMedias(id, element) {
 
     // Filters
     const filtersExpand = document.querySelector('.list_arrow')
-    const filterList = document.querySelector('#filters_list')
     const filtersItems = document.querySelectorAll('#filter_item')
     filtersExpand.addEventListener('click', (e)=>{
         e.preventDefault()
@@ -92,7 +91,6 @@ async function displayDataMedias(id, element) {
             elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
         })
         // Accessibilité
-        // FIXME: Si liste ouverte alors navigation avec Tab et Enter
         // TODO: Faire une seule fonction
         filterItem.addEventListener('keyup',(e)=>{
             e.preventDefault()
