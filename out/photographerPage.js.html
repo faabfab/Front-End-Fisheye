@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: photographerPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: photographerPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Fonction qui retourne l'élément contenant les informations du photographe
+ * @param {JSON} data information des photographes
+ * @returns {HTMLElement}
+ */
+function photographerInfosSection(data) {
+    const { name, city, country, price, portrait, tagline} = data;
+    const image = `assets/photographers/${portrait}`;
+
+    const divPrice = document.getElementById('photographer_prices')
+    divPrice.textContent = price
+
+    const infosSection = document.createElement('section')
+    infosSection.setAttribute('id','header')
+    infosSection.setAttribute('class','photograph-header')
+    
+    const infosText = document.createElement('div')
+    infosText.setAttribute('class','photograph-infos')
+    const h1 = document.createElement('h1')
+    h1.setAttribute('tabindex','2')
+    h1.textContent = name
+    const div = document.createElement('div')
+    div.setAttribute('tabindex','3')
+    const h2 = document.createElement('h2')
+    h2.textContent = city +', '+ country
+    const p = document.createElement('p')
+    p.textContent = tagline
+    
+    div.appendChild(h2)
+    div.appendChild(p)
+    infosText.appendChild(h1)
+    infosText.appendChild(div)
+
+    const button = document.createElement('button')
+    button.setAttribute('class','contact_button')
+    button.setAttribute('tabindex','4')
+    button.setAttribute('aria-label','Contactez moi')
+    button.textContent = 'Contactez-moi'
+
+    const picture = document.createElement('picture')
+    picture.setAttribute('class','imgLayer')
+    picture.setAttribute('tabindex','5')
+    picture.setAttribute('aria-label',name)
+    const img = document.createElement('img')
+    img.setAttribute('src',image)
+    picture.appendChild(img)
+
+    infosSection.appendChild(infosText)
+    infosSection.appendChild(button)
+    infosSection.appendChild(picture)
+
+    const formName = document.getElementById('photograph_name')
+    formName.textContent = name
+
+    return infosSection
+}
+
+/**
+ * Fonction qui retourne les informations d'un média
+ * @param {JSON} data medias
+ * @returns les information du média
+ */
+function mediasTemplate (data) {
+    const {photographerId ,title, image, video, likes, date, price} = data
+    let pict = ''
+    //test si image ou vidéo
+    if (image) { pict = `assets/images/${photographerId}/${image}` }
+    if (video) {
+        pict = video.substr(0,video.length-3)+'jpg'
+        pict = `assets/images/${photographerId}/`+pict
+    }
+    
+    /**
+     * fonction qui crée l'article correspondant à un média
+     * @returns {HTMLElement}
+     */
+    function getMediasCardDOM() {
+        
+        const article = document.createElement('article')
+        article.setAttribute('class', 'media')
+        const picture = document.createElement('picture')
+        picture.setAttribute('id','lightbox_button')
+        picture.setAttribute('role','button')
+        picture.setAttribute('aria-label',title)
+        const img = document.createElement('img')
+        img.setAttribute('src', pict)
+        img.setAttribute('alt',title)
+        picture.appendChild(img)
+        if (video) {
+            const video = document.createElement('div')
+            video.setAttribute('class','is_video')
+            video.innerHTML = '&lt;i class="fa-solid fa-video">&lt;/i>'
+            picture.appendChild(video)
+        }
+        const figcaption = document.createElement('figcaption')
+        figcaption.setAttribute('data-date',date)
+        const h2= document.createElement('h2')
+        h2.textContent = title
+        const h3 = document.createElement('h3')
+        const span = document.createElement('span')
+        span.setAttribute('class','likes_number')
+        span.setAttribute('role','text')
+        span.setAttribute('aria-label',likes+' likes')
+        span.textContent = likes
+        h3.appendChild(span)
+        const i = document.createElement('i')
+        i.setAttribute('class','fa-solid fa-heart')
+        const btLike = document.createElement('button')
+        btLike.setAttribute('aria-label','bouton like')
+        btLike.appendChild(i)
+        btLike.setAttribute('class','like_button')
+        h3.appendChild(btLike)
+        figcaption.appendChild(h2)
+        figcaption.appendChild(h3)
+        article.appendChild(picture)
+        article.appendChild(figcaption)
+
+        return article
+    }
+    return {photographerId, title, image, likes, date, price, getMediasCardDOM}
+}
+
+export {photographerInfosSection, mediasTemplate}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#mediasTemplate">mediasTemplate</a></li><li><a href="global.html#photographerInfosSection">photographerInfosSection</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Aug 11 2023 16:51:02 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

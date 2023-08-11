@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contactForm.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contactForm.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const first = document.querySelector('#first')
+const last = document.querySelector('#last')
+const email = document.querySelector('#email')
+const message = document.querySelector('#message')
+
+/**
+ * Fonction qui teste si name est un nom
+ * @param {string} name mot à tester
+ * @returns {boolean} résultat du test
+ */
+function isName(name) {
+    let nameRegex = /^[a-zA-Z-\s]+$/; // regex 
+    if ((name.length > 2) &amp;&amp; nameRegex.test(name)) {
+      return true
+    }
+    return false
+  }
+  
+/**
+ * Fonction qui retourne si first est un nom et affiche le message d'erreur
+ * @returns {boolean}
+ */
+  function isFirst() {
+    const firstData = document.getElementById('firstData');
+    if (isName(first.value)) {
+        firstData.setAttribute("data-error-visible", false)
+        firstData.removeAttribute('tabindex')
+        firstData.removeAttribute('aria-label')
+        firstData.setAttribute("data-error", "")
+        return true
+    }
+    firstData.setAttribute("data-error-visible", true)
+    firstData.setAttribute("tabindex", "8")
+    firstData.setAttribute("role", "text")
+    firstData.setAttribute("aria-label", "Veuillez entrer 2 caractères ou plus pour le champ du nom.")
+    firstData.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.")
+    firstData.focus()
+    return false
+}
+
+/**
+ * Fonction qui retourne si last est un nom et affiche le message d'erreur
+ * @returns {boolean}
+ */
+function isLast() {
+    const lastData = document.getElementById('lastData');
+    if (isName(last.value)) {
+        lastData.setAttribute("data-error-visible", false)
+        lastData.setAttribute("data-error", "")
+        lastData.removeAttribute('tabindex')
+        lastData.removeAttribute('aria-label')
+        return true
+    }
+    lastData.setAttribute("data-error-visible", true)
+    lastData.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.")
+    lastData.setAttribute("tabindex", "11")
+    lastData.setAttribute("role", "text")
+    lastData.setAttribute("aria-label", "Veuillez entrer 2 caractères ou plus pour le champ du nom.")
+    lastData.focus()
+    return false
+}
+
+/**
+ * Email error message
+ * @returns {boolean}
+*/
+function isEmail() {
+    const emailData = document.getElementById('emailData');
+    if (validEmail(email.value)) {
+        emailData.setAttribute("data-error-visible", false)
+        emailData.setAttribute("data-error", "")
+        emailData.removeAttribute('tabindex')
+        emailData.removeAttribute('aria-label')
+        return true
+    }
+    emailData.setAttribute("data-error-visible", true)
+    emailData.setAttribute("data-error", "Veuillez entrer un email valide.")
+    emailData.setAttribute("tabindex", "14")
+    emailData.setAttribute("role", "text")
+    emailData.setAttribute("aria-label", "Veuillez entrer un email valide.")
+    emailData.focus()
+    return false
+}
+
+/**
+ * Validation du mail
+ * Retourne vrai si le mail est bien formater faux sinon
+ * @param {string} mail l'adresse mail
+ * @returns {boolean}
+ */
+function validEmail(mail) {
+  let mailRegex = /^[a-z0-9-.]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+  if (mail != "" &amp;&amp; mailRegex.test(mail) == true) {
+    return true;
+  }
+}
+
+/**
+ * Retourne si le message est valide et affiche le message d'erreur
+ * @returns {boolean}
+ */
+function isMessage() {
+    const messageData = document.getElementById('messageData')
+    if (message.value!='') {
+        messageData.setAttribute("data-error-visible", false)
+        messageData.setAttribute("data-error", "")
+        messageData.removeAttribute('tabindex')
+        messageData.removeAttribute('aria-label')
+        return true
+    } else{
+        messageData.setAttribute("data-error-visible", true)
+        messageData.setAttribute("data-error", "Veuillez entrer un message.")
+        messageData.setAttribute("tabindex", "17")
+        messageData.setAttribute("role", "text")
+        messageData.setAttribute("aria-label", "Veuillez entrer un message.")
+        messageData.focus()
+        return false
+    }
+}
+
+/**
+ * Fonction qui valide le formulaire de contact
+ * @returns {boolean}
+ */
+function submit() {
+    if (
+        isFirst()
+        &amp;&amp; isLast()
+        &amp;&amp; isEmail()
+        &amp;&amp; isMessage()
+        ) {
+            let messageTable = [
+                ["Message de : ",first.value+' '+last.value],
+                ["Email : ",email.value],
+                ["Message : ",message.value]
+            ]
+            console.table(messageTable)
+            return true
+    } else{
+        console.log('Message incomplet')
+        return false
+    }
+}
+
+export{
+    submit,
+    isFirst,
+    isLast,
+    isEmail,
+    isMessage
+} </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#isEmail">isEmail</a></li><li><a href="global.html#isFirst">isFirst</a></li><li><a href="global.html#isLast">isLast</a></li><li><a href="global.html#isMessage">isMessage</a></li><li><a href="global.html#isName">isName</a></li><li><a href="global.html#submit">submit</a></li><li><a href="global.html#validEmail">validEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Aug 11 2023 16:51:22 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
