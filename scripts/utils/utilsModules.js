@@ -77,10 +77,9 @@ async function getMedias() {
 
 /**
  * Fonction qui retourne les médias du photographe id
- * @param {number} id id du photographe
  * @returns {Array}
  */
-async function getMediasByID(id) {
+async function getMediasByID() {
     const mediasByID = getMedias()
     return mediasByID
 }

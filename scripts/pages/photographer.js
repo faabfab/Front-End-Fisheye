@@ -31,12 +31,10 @@ async function displayDataMedias(id, element) {
     const medias = await getMediasByID(id)
 
     let sommeLikes = 0
-    let nbLikes = 0
     medias.forEach(media => {
         if (media.photographerId == id) {
             sommeLikes = sommeLikes + media.likes
             const mediaModel = mediasTemplate(media,id)
-            nbLikes = mediasTemplate(media,id).likes
             const mediaCardDOM = mediaModel.getMediasCardDOM()
             element.appendChild(mediaCardDOM)
         }
@@ -47,7 +45,7 @@ async function displayDataMedias(id, element) {
     buttonsLikes.forEach(element => {
         const likesSpan = element.parentNode.querySelector('.likes_number')
         let nbLikeLimit = Number(likesSpan.textContent)+1
-        element.addEventListener('click',function (e) {
+        element.addEventListener('click',function () {
             totalLikesIncrement(likesIncrement(likesSpan,nbLikeLimit))
         })
     });
@@ -207,7 +205,6 @@ async function init() {
     mediasSection.setAttribute('id','medias')
     main.appendChild(mediasSection)
     const photographerMedias = document.getElementById('medias')
-    const { PhotographMedias } = getMediasByID(photograph)
     displayDataMedias(id,photographerMedias);
     
     // Contact modal

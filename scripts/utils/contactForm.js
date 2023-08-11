@@ -89,7 +89,7 @@ function isEmail() {
  * @returns {boolean}
  */
 function validEmail(mail) {
-  let mailRegex = /^[a-z0-9-\.]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+  let mailRegex = /^[a-z0-9-.]+@[a-z0-9.-]+\.[a-z]{2,4}$/
   if (mail != "" && mailRegex.test(mail) == true) {
     return true;
   }

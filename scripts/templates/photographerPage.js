@@ -4,7 +4,7 @@
  * @returns {HTMLElement}
  */
 function photographerInfosSection(data) {
-    const { name, city, country, price, portrait, tagline, id } = data;
+    const { name, city, country, price, portrait, tagline} = data;
     const image = `assets/photographers/${portrait}`;
 
     const divPrice = document.getElementById('photographer_prices')
@@ -58,11 +58,10 @@ function photographerInfosSection(data) {
 /**
  * Fonction qui retourne les informations d'un média
  * @param {JSON} data medias
- * @param {number} phId photograph id
  * @returns les information du média
  */
-function mediasTemplate (data,phId) {
-    const {photographerId ,title, image, video, likes, date, price, id} = data
+function mediasTemplate (data) {
+    const {photographerId ,title, image, video, likes, date, price} = data
     let pict = ''
     //test si image ou vidéo
     if (image) { pict = `assets/images/${photographerId}/${image}` }
