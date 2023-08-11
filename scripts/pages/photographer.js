@@ -11,12 +11,21 @@ import { submit, isFirst, isLast, isEmail, isMessage } from "../utils/contactFor
 const main = document.querySelector('main')
 const photographerInfos = document.querySelector('#photographer_infos')
 
+/**
+ * Fonction qui affiche les infos du photographe
+ * @param {JSON} parameter les infos du photographe
+ * @param {HTMLElement} element élément où les paramètres du photographe
+ */
 async function displayDataInfos(parameter, element) {
     // Les infos
     element.appendChild(photographerInfosSection(parameter))
 }
 
-
+/**
+ * Fonction qui affiche les différentes infos d'un média du photographe sélectionné
+ * @param {number} id identifiant du photographe
+ * @param {HTMLElement} element là où les infos du média sont affichées
+ */
 async function displayDataMedias(id, element) {
     // Les médias
     const medias = await getMediasByID(id)
@@ -30,7 +39,6 @@ async function displayDataMedias(id, element) {
             nbLikes = mediasTemplate(media,id).likes
             const mediaCardDOM = mediaModel.getMediasCardDOM()
             element.appendChild(mediaCardDOM)
-
         }
     });
 
@@ -185,7 +193,9 @@ async function displayDataMedias(id, element) {
 
 }
 
-
+/**
+ * Fonction qui initialise la pge photographer.html
+ */
 async function init() {
     const url = document.location.href
     const id = getPhotographerId(url)

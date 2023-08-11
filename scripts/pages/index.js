@@ -1,3 +1,4 @@
+
 import { photographerTemplate } from "../templates/photographer.js";
 
 import { getPhotographers } from "../utils/utilsModules.js";

@@ -1,3 +1,8 @@
+/**
+ * fonction qui retourne le tableau des médias ranger selon la popularité croissante
+ * @param {HTMLElement} mediaCards conteneur des médias
+ * @returns {Array}
+ */
 function popularityFilter(mediaCards) {
     let tab = []
     mediaCards.forEach(mediaCard => {
@@ -14,6 +19,11 @@ function popularityFilter(mediaCards) {
     return tab
 }
 
+/**
+ * fonction qui retourne le tableau des médias ranger selon la date décroissante
+ * @param {HTMLElement} mediaCards conteneur des médias
+ * @returns {Array}
+ */
 function dateFilter(mediaCards) {
     let tab = []
     mediaCards.forEach(mediaCard => {
@@ -36,6 +46,11 @@ function dateFilter(mediaCards) {
     
 }
 
+/**
+ * fonction qui retourne le tableau des médias ranger selon l'ordre alphabétique des titres
+ * @param {HTMLElement} mediaCards conteneur des médias
+ * @returns {Array}
+ */
 function titleFilter(mediaCards) {
     let tab = []
     mediaCards.forEach(mediaCard => {
@@ -59,6 +74,11 @@ function titleFilter(mediaCards) {
     return tab
 }
 
+/**
+ * Fonction qui retourne un tableau d'éléments selon le filtre sélectionné
+ * @param {string} filterName nom du filtre
+ * @returns {Array}
+ */
 function mediasDatasReturn(filterName) {
     const mediasCards = document.querySelectorAll('article')
 

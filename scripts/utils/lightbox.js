@@ -60,6 +60,12 @@ function lightboxElementByElement(element) {
     return lightboxContent
 }
 
+/**
+ * Fonction qui retourne l'index de l'élément dans le tableau
+ * @param {HTMLElement} lightboxEl élément de la lightbox
+ * @param {Array} elementsArrayInitials tableaux des éléments possibles de la lightbox
+ * @returns {Number} index de l'élément dans le tableau
+ */
 function lightboxElementIndex(lightboxEl,elementsArrayInitials) {
     let h1 = lightboxEl.querySelector('#label_title')
     for (let index = 0; index < elementsArrayInitials.length; index++) {
@@ -71,6 +77,10 @@ function lightboxElementIndex(lightboxEl,elementsArrayInitials) {
     }
 }
 
+/**
+ * Fonction qui renvoi le tableau des éléments susceptibles de la lightbox
+ * @returns {Array} tableau des éléments susceptibles de la lightbox  
+ */
 function lightboxButtonsInit() {
     // Lightbox table init
     let lightboxButtons = document.querySelectorAll('#lightbox_button')
@@ -83,7 +93,13 @@ function lightboxButtonsInit() {
     return elementsArrayInitials
 }
 
-function openLightbox(lightboxButton,lightbox,lightboxClass,elementsArrayInitials) {
+/**
+ * Fonction qui affiche le média sélectionné dans la lightbox
+ * @param {HTMLElement} lightboxButton Bouton qui ouvre la lightbox
+ * @param {HTMLElement} lightbox élément lightbox
+ * @param {HTMLElement} lightboxClass lieu d'affichage de l'élément
+ */
+function openLightbox(lightboxButton,lightbox,lightboxClass) {
     let lightboxContentOld = document.querySelector('.lightbox_content')
     if (lightboxContentOld) {
         lightboxContentOld.remove()
@@ -93,6 +109,11 @@ function openLightbox(lightboxButton,lightbox,lightboxClass,elementsArrayInitial
     lightbox.removeAttribute('class')
 }
 
+/**
+ * Fonction qui affiche l'élément précédent de la lightbox
+ * @param {Array} elementsArrayInitials tableau des éléments de la lightbox
+ * @param {HTMLElement} lightboxClass élément contenant la lightbox
+ */
 function previousElement(elementsArrayInitials,lightboxClass) {
     let lightboxEl = document.querySelector('.lightbox_content')
     let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
@@ -103,6 +124,11 @@ function previousElement(elementsArrayInitials,lightboxClass) {
     }
 }
 
+/**
+ * Fonction qui affiche l'élément suivant de la lightbox
+ * @param {Array} elementsArrayInitials tableau des éléments de la lightbox
+ * @param {HTMLElement} lightboxClass élément contenant la lightbox
+ */
 function nextElement(elementsArrayInitials,lightboxClass) {
     let lightboxEl = document.querySelector('.lightbox_content')
     let indexContent = lightboxElementIndex(lightboxEl,elementsArrayInitials)
@@ -113,8 +139,12 @@ function nextElement(elementsArrayInitials,lightboxClass) {
     }
 }
 
+/**
+ * Fonction qui assigne le tabindex aux médias
+ * @param {Array} tab éléments de le lightbox
+ * @param {HTMLElement} el élément de la lightbox
+ */
 function tabindexLightbox(tab,el) {
-
     let firstIndex = 12 + lightboxElementIndex(el,tab) + 1
     let img = el.querySelector('img')
     let h1 = el.querySelector('h1')
@@ -123,6 +153,9 @@ function tabindexLightbox(tab,el) {
     h1.setAttribute('tabindex',firstIndex+1)
 }
 
+/**
+ * Fonction qui inactive la form de la lightbox
+ */
 function inactiveLightboxForm() {
     let inputImage = document.querySelector('#input_image')
     if (inputImage) {
@@ -130,7 +163,6 @@ function inactiveLightboxForm() {
             e.preventDefault()
         })
     }
-    //inputImage.focus()
 }
 
 export{

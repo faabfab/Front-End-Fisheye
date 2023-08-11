@@ -1,3 +1,8 @@
+/**
+ * Fonction qui retourne l'élément contenant les informations du photographe
+ * @param {JSON} data information des photographes
+ * @returns {HTMLElement}
+ */
 function photographerInfosSection(data) {
     const { name, city, country, price, portrait, tagline, id } = data;
     const image = `assets/photographers/${portrait}`;
@@ -50,8 +55,12 @@ function photographerInfosSection(data) {
     return infosSection
 }
 
-
-
+/**
+ * Fonction qui retourne les informations d'un média
+ * @param {JSON} data medias
+ * @param {number} phId photograph id
+ * @returns les information du média
+ */
 function mediasTemplate (data,phId) {
     const {photographerId ,title, image, video, likes, date, price, id} = data
     let pict = ''
@@ -62,7 +71,10 @@ function mediasTemplate (data,phId) {
         pict = `assets/images/${photographerId}/`+pict
     }
     
-    
+    /**
+     * fonction qui crée l'article correspondant à un média
+     * @returns {HTMLElement}
+     */
     function getMediasCardDOM() {
         
         const article = document.createElement('article')
@@ -106,9 +118,6 @@ function mediasTemplate (data,phId) {
 
         return article
     }
-
-    
-
     return {photographerId, title, image, likes, date, price, getMediasCardDOM}
 }
 

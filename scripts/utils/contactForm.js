@@ -1,10 +1,13 @@
-
-// BUG: tab avec le lecteur d'écran quand input validé
 const first = document.querySelector('#first')
 const last = document.querySelector('#last')
 const email = document.querySelector('#email')
 const message = document.querySelector('#message')
 
+/**
+ * Fonction qui teste si name est un nom
+ * @param {string} name mot à tester
+ * @returns {boolean} résultat du test
+ */
 function isName(name) {
     let nameRegex = /^[a-zA-Z-\s]+$/; // regex 
     if ((name.length > 2) && nameRegex.test(name)) {
@@ -13,7 +16,11 @@ function isName(name) {
     return false
   }
   
-function isFirst() {
+/**
+ * Fonction qui retourne si first est un nom et affiche le message d'erreur
+ * @returns {boolean}
+ */
+  function isFirst() {
     const firstData = document.getElementById('firstData');
     if (isName(first.value)) {
         firstData.setAttribute("data-error-visible", false)
@@ -32,9 +39,9 @@ function isFirst() {
 }
 
 /**
- * is last a valid name
- * @returns boulean
-*/
+ * Fonction qui retourne si last est un nom et affiche le message d'erreur
+ * @returns {boolean}
+ */
 function isLast() {
     const lastData = document.getElementById('lastData');
     if (isName(last.value)) {
@@ -55,7 +62,7 @@ function isLast() {
 
 /**
  * Email error message
- * @returns boulean
+ * @returns {boolean}
 */
 function isEmail() {
     const emailData = document.getElementById('emailData');
@@ -79,7 +86,7 @@ function isEmail() {
  * Validation du mail
  * Retourne vrai si le mail est bien formater faux sinon
  * @param {string} mail l'adresse mail
- * @returns boolean
+ * @returns {boolean}
  */
 function validEmail(mail) {
   let mailRegex = /^[a-z0-9-\.]+@[a-z0-9.-]+\.[a-z]{2,4}$/
@@ -88,6 +95,10 @@ function validEmail(mail) {
   }
 }
 
+/**
+ * Retourne si le message est valide et affiche le message d'erreur
+ * @returns {boolean}
+ */
 function isMessage() {
     const messageData = document.getElementById('messageData')
     if (message.value!='') {
@@ -107,6 +118,10 @@ function isMessage() {
     }
 }
 
+/**
+ * Fonction qui valide le formulaire de contact
+ * @returns {boolean}
+ */
 function submit() {
     if (
         isFirst()

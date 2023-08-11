@@ -25,6 +25,11 @@ async function getPhotographers() {
     }
 }
 
+/**
+ * Fonction qui retourne les informations du photographe id
+ * @param {number} id identifiant du photographe
+ * @returns {JSON}
+ */
 async function getPhotographer(id) {
     const { photographers } = await getPhotographers();
     let photograph = ''
@@ -36,13 +41,21 @@ async function getPhotographer(id) {
     return photograph
 }
 
+/**
+ * Retourne l'id du photographe
+ * @param {url} url adresse du JSON des photographes
+ * @returns {number}
+ */
 function getPhotographerId (url) {
     const param = url.substring(url.lastIndexOf('?')+1)
     const searchParams = new URLSearchParams(param);
     return searchParams.get("id")
 }
 
-
+/**
+ * Fonction qui retourne le tableau des médias du JSON
+ * @returns {Array} Les médias d'un photographe sous forme de tableau
+ */
 async function getMedias() {
 
     // adresse à récupérer
@@ -62,11 +75,22 @@ async function getMedias() {
     }
 }
 
+/**
+ * Fonction qui retourne les médias du photographe id
+ * @param {number} id id du photographe
+ * @returns {Array}
+ */
 async function getMediasByID(id) {
     const mediasByID = getMedias()
     return mediasByID
 }
 
+/**
+ * Fonction qui incrémente les likes revoie si la limite est atteinte
+ * @param {HTMLElement} elem media
+ * @param {number} limite nombre de likes autorisé
+ * @returns {boolean}
+ */
 function likesIncrement(elem,limite) {
     let nbLike = Number(elem.textContent)
     if (nbLike<limite) {
@@ -76,6 +100,10 @@ function likesIncrement(elem,limite) {
     } else{return false}
 }
 
+/**
+ * Fonction qui incrémente le total des likes
+ * @param {boolean} bool si la limite des likes est atteinte
+ */
 function totalLikesIncrement(bool) {
     const totalLikes = document.querySelector('#photographer_likes')
     let nbTotalLikes = Number(totalLikes.textContent)
@@ -85,6 +113,11 @@ function totalLikesIncrement(bool) {
     totalLikes.textContent = nbTotalLikes
 }
 
+/**
+ * Fonction qui gère l'affichage des filtres
+ * @param {HTMLElement} filtersExpand élément qui ouvre le choix des filtres
+ * @param {Array} filtersItems tableau des filtres
+ */
 function filtersManage (filtersExpand,filtersItems) {
     let state = filtersExpand.getAttribute('data-state')
     //const filterItem = document.querySelectorAll('#filter_item')
@@ -112,6 +145,12 @@ function filtersManage (filtersExpand,filtersItems) {
     }
 }
 
+/**
+ * Fonction qui affiche les médias selon le filtre sélectionné et gère la listbox
+ * @param {Array} listItems liste des filtres
+ * @param {HTMLElement} item filtre choisi
+ * @param {HTMLElement} arrowElement listbox element
+ */
 function filterSelect(listItems, item, arrowElement) {
     let select // selected element
     let name = item.textContent
@@ -143,6 +182,9 @@ function filterSelect(listItems, item, arrowElement) {
     arrowElement.setAttribute('data-state','close')
 }
 
+/**
+ * Fonction qui assigne un tabindex au médias
+ */
 function mediasTabindex() {
     let i = 12
     let articles = document.querySelectorAll('article')
