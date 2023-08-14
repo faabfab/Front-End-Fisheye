@@ -55,6 +55,18 @@ function photographerInfosSection(data) {
     return infosSection
 }
 
+
+function mediaCard(image,video,photographerId) {
+    if (image) {
+        return`assets/images/${photographerId}/${image}`
+    }
+    if (video) {
+        let pict = video.substr(0,video.length-3)+'jpg'
+        return `assets/images/${photographerId}/`+pict
+    }
+}
+
+
 /**
  * Fonction qui retourne les informations d'un média
  * @param {JSON} data medias
@@ -64,10 +76,14 @@ function mediasTemplate (data) {
     const {photographerId ,title, image, video, likes, date, price} = data
     let pict = ''
     //test si image ou vidéo
-    if (image) { pict = `assets/images/${photographerId}/${image}` }
+    if (image) {
+        pict = `assets/images/${photographerId}/${image}`
+        return {photographerId, title, image, likes, date, price, getMediasCardDOM}
+    }
     if (video) {
         pict = video.substr(0,video.length-3)+'jpg'
         pict = `assets/images/${photographerId}/`+pict
+        return {photographerId, title, video, likes, date, price, getMediasCardDOM}
     }
     
     /**
@@ -117,7 +133,7 @@ function mediasTemplate (data) {
 
         return article
     }
-    return {photographerId, title, image, likes, date, price, getMediasCardDOM}
+    
 }
 
 export {photographerInfosSection, mediasTemplate}
