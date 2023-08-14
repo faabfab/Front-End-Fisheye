@@ -19,8 +19,6 @@ function lightboxElementByElement(element) {
         image = document.createElement('video')
         image.setAttribute('controls','')
         image.setAttribute('class','lightbox_video')
-        //image.setAttribute('width','100%')
-        //image.setAttribute('height','85%')
         let source = document.createElement('source')
         source.setAttribute('type','video/mp4')
         src = src.replace('.jpg','.mp4')

@@ -14,7 +14,6 @@ async function displayData(photographers) {
      * A chaque photographe on crée une template, on crée l'affichage
      * et on l'ajoute dans .photographer_section
      */        
-
     photographers.forEach((photographer) => {
         const photographerModel = photographerTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
