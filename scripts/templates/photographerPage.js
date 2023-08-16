@@ -56,6 +56,13 @@ function photographerInfosSection(data) {
     return infosSection
 }
 
+/**
+ * factory qui retourne media path
+ * @param {number} photographerId 
+ * @param {string} image data
+ * @param {string} video data
+ * @returns {string} media path
+ */
 function buildMediaPath(photographerId,image,video) {
     if (image) {
         return `assets/images/${photographerId}/${image}`

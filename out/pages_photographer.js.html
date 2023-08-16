@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/photographer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/photographer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// =============================================================================
+// Ce baser sur index.js
+// =============================================================================
+
+
+import { getPhotographer, getPhotographerId, getMediasByID, likesIncrement, totalLikesIncrement, filtersManage, filterSelect, mediasTabindex } from "../utils/utilsModules.js"
+import { photographerInfosSection, mediasTemplate } from "../templates/photographerPage.js"
+import { inactiveLightboxForm, lightboxButtonsInit, nextElement, openLightbox, previousElement } from "../utils/lightbox.js"
+import { submit, isFirst, isLast, isEmail, isMessage } from "../utils/contactForm.js"
+
+const main = document.querySelector('main')
+const photographerInfos = document.querySelector('#photographer_infos')
+
+/**
+ * Fonction qui affiche les infos du photographe
+ * @param {JSON} parameter les infos du photographe
+ * @param {HTMLElement} element élément où les paramètres du photographe
+ */
+async function displayDataInfos(parameter, element) {
+    // Les infos
+    element.appendChild(photographerInfosSection(parameter))
+}
+
+/**
+ * Fonction qui affiche les différentes infos d'un média du photographe sélectionné
+ * @param {number} id identifiant du photographe
+ * @param {HTMLElement} element là où les infos du média sont affichées
+ */
+async function displayDataMedias(id, element) {
+    // Les médias
+    const medias = await getMediasByID(id)
+
+    let sommeLikes = 0
+    medias.forEach(media => {
+        if (media.photographerId == id) {
+            sommeLikes = sommeLikes + media.likes
+            const mediaModel = mediasTemplate(media,id)
+            const mediaCardDOM = mediaModel.getMediasCardDOM()
+            element.appendChild(mediaCardDOM)
+        }
+    });
+
+    // Gestion des likes
+    const buttonsLikes = document.querySelectorAll('.like_button')
+    buttonsLikes.forEach(element => {
+        const likesSpan = element.parentNode.querySelector('.likes_number')
+        let nbLikeLimit = Number(likesSpan.textContent)+1
+        element.addEventListener('click',function () {
+            totalLikesIncrement(likesIncrement(likesSpan,nbLikeLimit))
+        })
+    });
+    const photographerLikes = document.getElementById('photographer_likes')
+    photographerLikes.textContent = sommeLikes
+
+    // Lightbox table init
+    let articlesMedias = document.querySelectorAll('article')
+    let tabData = Object.values(articlesMedias) //conversion object en tab
+
+    const lightbox = document.querySelector('#lightbox')
+    const lightboxClass = document.querySelector('.lightbox')
+    //
+    let elementsArrayInitials = []
+    elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
+    //
+
+    // Filters
+    const filtersExpand = document.querySelector('.list_arrow')
+    const filtersItems = document.querySelectorAll('#filter_item')
+    filtersExpand.addEventListener('click', (e)=>{
+        e.preventDefault()
+        filtersManage(filtersExpand,filtersItems)
+    })
+    
+    // Accessibilité
+    filtersExpand.addEventListener('keyup',(e)=>{
+        e.preventDefault()
+        if (e.key==='Tab') {
+            filtersManage (filtersExpand,filtersItems)
+        }
+    })
+    
+    filtersItems.forEach(filterItem => {
+        filterItem.addEventListener('click',(e)=>{
+            e.preventDefault()
+            //remove old element
+            let lightboxContentOld = document.querySelector('.lightbox_content')
+            if (lightboxContentOld) {
+                lightboxContentOld.remove()
+            }
+            filterSelect(filtersItems,filterItem,filtersExpand)
+            // Tabindex
+            mediasTabindex()
+            // on change le tableau de la lightbox
+            let articlesMedias = document.querySelectorAll('article')
+            let tabData = Object.values(articlesMedias) //conversion object en tab
+            elementsArrayInitials = []
+            elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
+        })
+        // Accessibilité
+        // TODO: Faire une seule fonction
+        filterItem.addEventListener('keyup',(e)=>{
+            e.preventDefault()
+            if (e.key=='Enter') {
+                //remove old element
+                let lightboxContentOld = document.querySelector('.lightbox_content')
+                if (lightboxContentOld) {
+                    lightboxContentOld.remove()
+                }
+                filterSelect(filtersItems,filterItem,filtersExpand)
+                // Tabindex
+                mediasTabindex()
+                // on change le tableau de la lightbox
+                let articlesMedias = document.querySelectorAll('article')
+                let tabData = Object.values(articlesMedias) //conversion object en tab
+                elementsArrayInitials = []
+                elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
+            }
+        })
+    });
+
+    // Lightbox events
+
+    const closeLightboxButton = document.querySelector('.lightbox_content_close_button')
+    closeLightboxButton.addEventListener('click', ()=>{
+        let lightboxContentOld = document.querySelector('.lightbox_content')
+        lightboxContentOld.remove()
+        lightbox.setAttribute('class','invisible')
+    })
+    
+    
+    const previousBtn = document.querySelector('.left')
+    const nextBtn = document.querySelector('.right')
+    
+
+
+    const lightboxButtons = document.querySelectorAll('#lightbox_button')
+    lightboxButtons.forEach(lightboxButton => {
+        lightboxButton.addEventListener('click', ()=>{
+            openLightbox(lightboxButton,lightbox,lightboxClass,elementsArrayInitials)
+            inactiveLightboxForm()
+        })
+
+        // Accessibilité
+        lightboxButton.addEventListener('keyup',(e)=>{
+            if (e.key == 'Enter') {
+                openLightbox(lightboxButton,lightbox,lightboxClass)
+                lightbox.focus()
+                inactiveLightboxForm()
+            }
+        })
+
+    });
+
+
+    previousBtn.addEventListener('click',()=>{
+        previousElement(elementsArrayInitials,lightboxClass)
+        inactiveLightboxForm()
+    })
+
+    nextBtn.addEventListener('click',()=>{
+        nextElement(elementsArrayInitials,lightboxClass)
+        inactiveLightboxForm()
+    })
+
+
+    document.addEventListener('keyup',(e)=>{
+        // on lightbox
+        if (lightbox.getAttribute('class')!='invisible') {
+            if (e.key=='ArrowLeft') { //Previous
+                previousBtn.focus()
+                previousElement(elementsArrayInitials,lightboxClass)
+                inactiveLightboxForm()
+            }
+            if (e.key=='ArrowRight') { //Next
+                nextBtn.focus()
+                nextElement(elementsArrayInitials,lightboxClass)
+                inactiveLightboxForm()
+            }
+            if (e.key=='Escape') {
+                closeLightboxButton.focus()
+                let lightboxContentOld = document.querySelector('.lightbox_content')
+                lightboxContentOld.remove()
+                lightbox.setAttribute('class','invisible')
+            }
+        }
+
+    })
+ 
+    // Tabindex
+    mediasTabindex()
+
+}
+
+/**
+ * Fonction qui initialise la pge photographer.html
+ */
+async function init() {
+    const url = document.location.href
+    const id = getPhotographerId(url)
+    // Récupère les datas du photographe
+    const photograph = await getPhotographer(id)
+    // affichage les infos du photographe
+    displayDataInfos(photograph,photographerInfos);
+    const mediasSection = document.createElement('section')
+    mediasSection.setAttribute('id','medias')
+    main.appendChild(mediasSection)
+    const photographerMedias = document.getElementById('medias')
+    displayDataMedias(id,photographerMedias);
+    
+    // Contact modal
+    const contactModal = document.querySelector('#contact_modal')
+
+    const contactButton = document.querySelector('.contact_button')
+    contactButton.addEventListener('click', ()=>{
+        contactModal.showModal()
+    })
+    const closeButton = document.querySelector('.closeButton')
+    closeButton.addEventListener('click' , ()=>{
+        contactModal.close()
+    })
+    
+    const contactConfirmModal = document.querySelector('#contact_modal_confirm')
+    const submitButton = document.querySelector('#submit_button')
+    submitButton.addEventListener('click',()=>{
+        if (submit()) {            
+            contactModal.close()
+            contactConfirmModal.showModal()
+        } else{ console.log('Message invalide') }
+    })
+    const closeConfirmButton = document.querySelector('#close_confirm_button')
+    closeConfirmButton.addEventListener('click',()=>{
+        contactConfirmModal.close()
+    })
+    
+    // Accessibilité
+    document.addEventListener('keyup',(e)=>{
+        if (contactModal.getAttributeNames('open')[1]=='open') {
+            if (e.key=='Escape') {
+                contactModal.close()
+            }
+        }
+        if (contactConfirmModal.getAttributeNames('open')[1]=='open') {
+            if (e.key=='Escape') {
+                contactConfirmModal.close()
+            }
+        }
+    })
+
+    // Form events
+    const first = document.getElementById('first');
+    first.addEventListener('focusout', function (e) {
+        e.preventDefault()
+        isFirst()
+    });
+
+    const last = document.getElementById('last');
+    last.addEventListener('focusout', function (e) {
+        e.preventDefault()
+        isLast()
+    });
+
+    const email = document.getElementById('email');
+    email.addEventListener('focusout', function (e) {
+        e.preventDefault()
+        isEmail()
+    });
+
+    const message = document.getElementById('message')
+    message.addEventListener('focusout',(e)=>{
+        e.preventDefault()
+        isMessage()
+    })
+
+    
+}
+
+init()
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#buildMediaByType">buildMediaByType</a></li><li><a href="global.html#buildMediaPath">buildMediaPath</a></li><li><a href="global.html#dateFilter">dateFilter</a></li><li><a href="global.html#displayData">displayData</a></li><li><a href="global.html#displayDataInfos">displayDataInfos</a></li><li><a href="global.html#displayDataMedias">displayDataMedias</a></li><li><a href="global.html#filterSelect">filterSelect</a></li><li><a href="global.html#filtersManage">filtersManage</a></li><li><a href="global.html#getMedias">getMedias</a></li><li><a href="global.html#getMediasByID">getMediasByID</a></li><li><a href="global.html#getPhotographer">getPhotographer</a></li><li><a href="global.html#getPhotographerId">getPhotographerId</a></li><li><a href="global.html#getPhotographers">getPhotographers</a></li><li><a href="global.html#inactiveLightboxForm">inactiveLightboxForm</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isEmail">isEmail</a></li><li><a href="global.html#isFirst">isFirst</a></li><li><a href="global.html#isLast">isLast</a></li><li><a href="global.html#isMessage">isMessage</a></li><li><a href="global.html#isName">isName</a></li><li><a href="global.html#lightboxButtonsInit">lightboxButtonsInit</a></li><li><a href="global.html#lightboxElementByElement">lightboxElementByElement</a></li><li><a href="global.html#lightboxElementIndex">lightboxElementIndex</a></li><li><a href="global.html#likesIncrement">likesIncrement</a></li><li><a href="global.html#mediasDatasReturn">mediasDatasReturn</a></li><li><a href="global.html#mediasTabindex">mediasTabindex</a></li><li><a href="global.html#mediasTemplate">mediasTemplate</a></li><li><a href="global.html#nextElement">nextElement</a></li><li><a href="global.html#openLightbox">openLightbox</a></li><li><a href="global.html#photographerInfosSection">photographerInfosSection</a></li><li><a href="global.html#photographerTemplate">photographerTemplate</a></li><li><a href="global.html#popularityFilter">popularityFilter</a></li><li><a href="global.html#previousElement">previousElement</a></li><li><a href="global.html#submit">submit</a></li><li><a href="global.html#tabindexLightbox">tabindexLightbox</a></li><li><a href="global.html#titleFilter">titleFilter</a></li><li><a href="global.html#totalLikesIncrement">totalLikesIncrement</a></li><li><a href="global.html#validEmail">validEmail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Aug 16 2023 11:35:36 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
