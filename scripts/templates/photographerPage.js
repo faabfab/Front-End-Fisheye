@@ -43,6 +43,7 @@ function photographerInfosSection(data) {
     picture.setAttribute('aria-label',name)
     const img = document.createElement('img')
     img.setAttribute('src',image)
+    img.setAttribute('alt',name)
     picture.appendChild(img)
 
     infosSection.appendChild(infosText)
@@ -55,17 +56,15 @@ function photographerInfosSection(data) {
     return infosSection
 }
 
-
-function mediaCard(image,video,photographerId) {
+function buildMediaPath(photographerId,image,video) {
     if (image) {
-        return`assets/images/${photographerId}/${image}`
+        return `assets/images/${photographerId}/${image}`
     }
     if (video) {
         let pict = video.substr(0,video.length-3)+'jpg'
-        return `assets/images/${photographerId}/`+pict
+        return `assets/images/${photographerId}/`+ pict
     }
 }
-
 
 /**
  * Fonction qui retourne les informations d'un média
@@ -74,17 +73,10 @@ function mediaCard(image,video,photographerId) {
  */
 function mediasTemplate (data) {
     const {photographerId ,title, image, video, likes, date, price} = data
-    let pict = ''
-    //test si image ou vidéo
-    if (image) {
-        pict = `assets/images/${photographerId}/${image}`
-        return {photographerId, title, image, likes, date, price, getMediasCardDOM}
-    }
-    if (video) {
-        pict = video.substr(0,video.length-3)+'jpg'
-        pict = `assets/images/${photographerId}/`+pict
-        return {photographerId, title, video, likes, date, price, getMediasCardDOM}
-    }
+    
+    let pict = buildMediaPath(photographerId,image,video)
+
+    return {photographerId, title,image, video, likes, date, price, getMediasCardDOM}
     
     /**
      * fonction qui crée l'article correspondant à un média

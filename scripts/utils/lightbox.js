@@ -2,7 +2,53 @@ function displayInLightbox(el,element) {
     element.prepend(el)
 }
 
+// Factory
+/**
+ * Factory qui retourne l'element html suivant son type (image ou vidéo)
+ * @param {HTMLElement} element de la page
+ * @param {String} title titre du media
+ * @param {string} src path du média
+ * @returns {HTMLElement}
+ */
+function buildMediaByType(element,title,src) {
+    let image
+    switch (element.querySelector('.is_video')) {
+        case null: // c'est une image
+            image = document.createElement('input')
+            image.setAttribute('type', 'image')
+            image.setAttribute('src', src)
+            image.setAttribute('alt',title.textContent)
+            image.setAttribute('id','input_image')
+            image.setAttribute('name','image')
+            image.setAttribute('role','img')
+            image.setAttribute('value',' ')
+            return image
+    
+        default: // c'est une video
+            image = document.createElement('video')
+            image.setAttribute('controls','')
+            image.setAttribute('class','lightbox_video')
+            // eslint-disable-next-line no-case-declarations
+            let source = document.createElement('source')
+            source.setAttribute('type','video/mp4')
+            src = src.replace('.jpg','.mp4')
+            source.setAttribute('src', src)
+            image.appendChild(source)
+            // eslint-disable-next-line no-case-declarations
+            let track = document.createElement('track')
+            track.setAttribute('label','English')
+            track.setAttribute('kind','subtitles')
+            image.appendChild(track)
+            return image
+    }
+}
+
 // TODO: Tester les aria et role pour l'accessibilité
+/**
+ * retourne l'élément à afficher dans le lightbox
+ * @param {HTMLElement} element de la page
+ * @returns {HTMLElement} de la lightbox
+ */
 function lightboxElementByElement(element) {
     let title = element.parentElement.querySelector('h2')
     let img = element.parentElement.querySelector('img')
@@ -13,31 +59,8 @@ function lightboxElementByElement(element) {
     lightboxContent.setAttribute('class','lightbox_content')
     lightboxContent.setAttribute('aria-label',title.textContent)
 
-    let image
+    let image = buildMediaByType(element,title,src)
 
-    if (element.querySelector('.is_video')) {
-        image = document.createElement('video')
-        image.setAttribute('controls','')
-        image.setAttribute('class','lightbox_video')
-        let source = document.createElement('source')
-        source.setAttribute('type','video/mp4')
-        src = src.replace('.jpg','.mp4')
-        source.setAttribute('src', src)
-        image.appendChild(source)
-        let track = document.createElement('track')
-        track.setAttribute('label','English')
-        track.setAttribute('kind','subtitles')
-        image.appendChild(track)
-    } else {
-        image = document.createElement('input')
-        image.setAttribute('type', 'image')
-        image.setAttribute('src', src)
-        image.setAttribute('alt',title.textContent)
-        image.setAttribute('id','input_image')
-        image.setAttribute('name','image')
-        image.setAttribute('role','img')
-        image.setAttribute('value',' ')
-    }
     image.setAttribute('aria-label',title.textContent)
     let label = document.createElement('label')
     label.setAttribute('for','input_title')

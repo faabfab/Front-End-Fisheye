@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
       <div class="filters">
         <p class="filters_display" tabindex="7">Trier par</p>
         <p class="list_arrow" tabindex="8" data-state="close" aria-label="menu développé"><i class="fa-solid fa-chevron-down"></i></p>
-        <ul id="filters_list" data-state="close" role="listbox" aria-labelledby="Order by" aria-multiselectable="true" aria-activedescendant="filter_item" aria-selected="true">
+        <ul id="filters_list" data-state="close" role="listbox" aria-labelledby="filter_item" aria-multiselectable="true" aria-activedescendant="filter_item" aria-selected="true">
           <li id="filter_item" data-select="true" class="no_border" tabindex="9" role="button" aria-label="Popularité" aria-haspopup="listbox" aria-expanded="true">Popularité</li>
           <li id="filter_item" class="invisible" data-select="false" tabindex="10" role="button" aria-label="Date" aria-haspopup="listbox" aria-expanded="true">Date</li>
           <li id="filter_item" class="invisible" data-select="false" tabindex="11" role="button" aria-label="Titre" aria-haspopup="listbox" aria-expanded="true">Titre</li>
@@ -33,7 +33,7 @@
       </p>
       <p><span id="photographer_prices"></span> €<span aria-label="par">/</span>jour</p>
     </div>
-    <div id="lightbox" class="invisible" role="dialog" aria-labelledby="Lightbox" tabindex="-1">
+    <div id="lightbox" class="invisible" role="dialog" aria-labelledby="lightbox" tabindex="-1">
       <div class="lightbox">
         <button class="left" role="button" aria-label="photo précédente"><i class="fa-solid fa-chevron-left"></i></button>
         <button class="right" role="button" aria-label="photo suivante"><i class="fa-solid fa-chevron-right"></i></button>
@@ -44,7 +44,7 @@
 			<div class="modal" role="dialog" aria-labelledby="contact_title" tabindex="-1">
 				<header>
           <h2 role="textbox" id="contact_title" aria-roledescription="heading" tabindex="5">Contactez-moi <br><span id="photograph_name"></span></h2>
-          <img src="assets/icons/close.svg" class="closeButton" role="button" tabindex="19" aria-label="bouton fermer"/>
+          <img src="assets/icons/close.svg" class="closeButton" role="button" tabindex="19" aria-label="bouton fermer" alt="close button"/>
         </header>
         <form id="contactForm" name="contact">
           <div class="formData" id="firstData">
@@ -72,7 +72,7 @@
       <div class="modal" role="dialog" tabindex="-1" aria-labelledby="contact_title">
         <header>
           <h3 role="text" tabindex="2" id="contact_title">Votre message a été envoyé</h3>
-          <img id="close_confirm_button" src="assets/icons/close.svg" class="closeButton" tabindex="3" role="button" aria-label="bouton fermer"/>
+          <img id="close_confirm_button" src="assets/icons/close.svg" class="closeButton" tabindex="3" role="button" aria-label="bouton fermer" alt="close button"/>
         </header>
       </div>
     </dialog>
