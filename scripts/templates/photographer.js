@@ -15,7 +15,6 @@ function photographerTemplate(data) {
         const a = document.createElement('a')
         a.setAttribute('href','photographer.html?id='+id)
         a.setAttribute('aria-label', name)
-        //a.setAttribute('tabindex','3')
         const pict = document.createElement('picture')
         pict.setAttribute('class', 'imgLayer')
         const img = document.createElement( 'img' );
@@ -26,7 +25,6 @@ function photographerTemplate(data) {
         const h3 = document.createElement( 'h3')
         h3.textContent = city+', '+country;
         const p =document.createElement('p')
-        //p.setAttribute('tabindex','4')
         p.textContent = tagline
         const p2 =document.createElement('p')
         p2.setAttribute('class','price')

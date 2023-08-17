@@ -22,12 +22,16 @@ function buildMediaByType(element,title,src) {
             image.setAttribute('name','image')
             image.setAttribute('role','img')
             image.setAttribute('value',' ')
+            image.setAttribute('aria-label',title.textContent)
             return image
     
         default: // c'est une video
             image = document.createElement('video')
             image.setAttribute('controls','')
             image.setAttribute('class','lightbox_video')
+            image.setAttribute('role','img')
+            image.setAttribute('aria-label',title.textContent+ ' vidéo')
+            console.log('vidéo')
             // eslint-disable-next-line no-case-declarations
             let source = document.createElement('source')
             source.setAttribute('type','video/mp4')
@@ -43,7 +47,6 @@ function buildMediaByType(element,title,src) {
     }
 }
 
-// TODO: Tester les aria et role pour l'accessibilité
 /**
  * retourne l'élément à afficher dans le lightbox
  * @param {HTMLElement} element de la page
@@ -61,7 +64,7 @@ function lightboxElementByElement(element) {
 
     let image = buildMediaByType(element,title,src)
 
-    image.setAttribute('aria-label',title.textContent)
+    //image.setAttribute('aria-label',title.textContent)
     let label = document.createElement('label')
     label.setAttribute('for','input_title')
     label.setAttribute('id','label_title')

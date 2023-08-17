@@ -97,7 +97,6 @@ async function displayDataMedias(id, element) {
             elementsArrayInitials = lightboxButtonsInit(tabData,lightboxClass)
         })
         // Accessibilité
-        // TODO: Faire une seule fonction
         filterItem.addEventListener('keyup',(e)=>{
             e.preventDefault()
             if (e.key=='Enter') {

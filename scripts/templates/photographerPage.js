@@ -106,6 +106,7 @@ function mediasTemplate (data) {
             video.setAttribute('class','is_video')
             video.innerHTML = '<i class="fa-solid fa-video"></i>'
             picture.appendChild(video)
+            picture.setAttribute('aria-label',title+' vidéo')
         }
         const figcaption = document.createElement('figcaption')
         figcaption.setAttribute('data-date',date)
