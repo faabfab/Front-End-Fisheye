@@ -137,7 +137,6 @@ function submit() {
             console.table(messageTable)
             return true
     } else{
-        console.log('Message incomplet')
         return false
     }
 }

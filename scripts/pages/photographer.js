@@ -224,7 +224,7 @@ async function init() {
         if (submit()) {            
             contactModal.close()
             contactConfirmModal.showModal()
-        } else{ console.log('Message invalide') }
+        }
     })
     const closeConfirmButton = document.querySelector('#close_confirm_button')
     closeConfirmButton.addEventListener('click',()=>{

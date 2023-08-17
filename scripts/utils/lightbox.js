@@ -31,7 +31,6 @@ function buildMediaByType(element,title,src) {
             image.setAttribute('class','lightbox_video')
             image.setAttribute('role','img')
             image.setAttribute('aria-label',title.textContent+ ' vidéo')
-            console.log('vidéo')
             // eslint-disable-next-line no-case-declarations
             let source = document.createElement('source')
             source.setAttribute('type','video/mp4')
@@ -172,7 +171,6 @@ function tabindexLightbox(tab,el) {
     let firstIndex = 12 + lightboxElementIndex(el,tab) + 1
     let img = el.querySelector('img')
     let h1 = el.querySelector('h1')
-    console.log(img)
     img.setAttribute('tabindex',firstIndex)
     h1.setAttribute('tabindex',firstIndex+1)
 }
